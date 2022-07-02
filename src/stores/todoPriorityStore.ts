@@ -1,10 +1,10 @@
+import {Action, Reducer} from 'redux';
+import {applicationLoaderActionCreators} from './applicationLoaderStore';
+import {ApplicationStates, AppThunkAction} from './applicationStore';
 import {TodoPriorityModel} from '../models/todoPriorityModel';
 import {CustomThunkDispatch, Nullable} from '../types';
-import {ApplicationStates, AppThunkAction} from './applicationStore';
-import {Action, Reducer} from 'redux';
-import DateHelper from '../helpers/dateHelper';
 import generateUUID from '../helpers/uuidHelper';
-import {applicationLoaderActionCreators} from './applicationLoaderStore';
+import DateHelper from '../helpers/dateHelper';
 import {LoaderType} from '../enums/loaderType';
 
 export interface TodoPriorityState {
@@ -38,7 +38,7 @@ export const todoPriorityActionCreators = {
         if (DateHelper.timeDiff(activeState.TodoPriorityState.lastSync, null, 'hour') < 12)
             globalDispatch(todoPriorityActionCreators.getTodoPriorityData());
     },
-    getTodoPriorityData: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    getTodoPriorityData: (): AppThunkAction<KnownAction> => (dispatch) => {
         const loaderId = generateUUID();
         const globalDispatch = dispatch as CustomThunkDispatch;
 
@@ -53,7 +53,7 @@ export const todoPriorityActionCreators = {
             globalDispatch(applicationLoaderActionCreators.hideGlobalLoader(loaderId));
         }, 4000);
 
-        globalDispatch(applicationLoaderActionCreators.showGlobalLoader('Durum verileride sunucudan alınıyor...', loaderId, LoaderType.inclusive));
+        globalDispatch(applicationLoaderActionCreators.showGlobalLoader({name: 'fetch-todo-priority-list', defaultTranslation: 'Durum verileride sunucudan alınıyor...'}, loaderId, LoaderType.inclusive));
         dispatch({type: 'REQUEST_TODO_PRIORITY_ACTION'});
     }
 }

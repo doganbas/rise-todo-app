@@ -70,7 +70,13 @@ const ApplicationLoaderProvider: FunctionComponent<PropsWithChildren> = (props) 
                                         <div className="c-provider__loader-list-item-effect">
                                             <img src={appLoading} alt="App Loading"/>
                                         </div>
-                                        <span className="c-provider__loader-list-item-text">{item.visibleText ?? (i18next.t('undefined-loader-text', 'Bilinmeyen yükleme...' ?? 'Bilinmeyen yükleme...')).toString()}</span>
+                                        <span className="c-provider__loader-list-item-text">
+                                            {
+                                                item.visibleText ?
+                                                    (i18next.t(item.visibleText.name, item.visibleText.defaultTranslation)).toString() :
+                                                    (i18next.t('undefined-loader-text', 'Bilinmeyen yükleme...') ?? 'Bilinmeyen yükleme...').toString()
+                                            }
+                                        </span>
                                         <TimeCounter startDate={item.startTime} textStyle="c-provider__loader-list-item-counter"/>
                                     </div>
                                 ))
@@ -98,7 +104,13 @@ const ApplicationLoaderProvider: FunctionComponent<PropsWithChildren> = (props) 
                                         <div className="c-provider__loader-list-item-effect">
                                             <img src={appLoading} alt="App Loading"/>
                                         </div>
-                                        <span className="c-provider__loader-list-item-text">{item.visibleText ?? (i18next.t('undefined-loader-text', 'Bilinmeyen yükleme...' ?? 'Bilinmeyen yükleme...')).toString()}</span>
+                                        <span className="c-provider__loader-list-item-text">
+                                            {
+                                                item.visibleText ?
+                                                    (i18next.t(item.visibleText.name, item.visibleText.defaultTranslation)).toString() :
+                                                    (i18next.t('undefined-loader-text', 'Bilinmeyen yükleme...') ?? 'Bilinmeyen yükleme...').toString()
+                                            }
+                                        </span>
                                         <TimeCounter startDate={item.startTime} textStyle="c-provider__loader-list-item-counter"/>
                                     </div>
                                 ))

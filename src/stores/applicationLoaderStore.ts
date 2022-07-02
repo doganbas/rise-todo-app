@@ -3,6 +3,7 @@ import {ApplicationLoaderModel} from '../models/applicationLoaderModel';
 import {AppThunkAction} from './applicationStore';
 import {LoaderType} from '../enums/loaderType';
 import {Nullable} from '../types';
+import {ApplicationTranslationModel} from '../models/applicationTranslationModel';
 
 export interface ApplicationLoaderState {
     isVisible: boolean,
@@ -28,7 +29,7 @@ const unloadedState: ApplicationLoaderState = {
 };
 
 export const applicationLoaderActionCreators = {
-    showGlobalLoader: (stateText: Nullable<string>, loaderId: string, loaderType: LoaderType): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    showGlobalLoader: (stateText: Nullable<ApplicationTranslationModel>, loaderId: string, loaderType: LoaderType): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const allLoaders: ApplicationLoaderModel[] = getState()?.ApplicationLoaderState?.loaderItems ?? [];
         const activeLoaderIndex = allLoaders.findIndex(nq => nq.loaderId === loaderId);
         if (activeLoaderIndex > -1)
