@@ -1,0 +1,251 @@
+@import "../utils/mixins";
+
+.c-provider {
+  &-container {
+    @include flex(space-between, stretch);
+    @include break-md {
+      min-height: 100vh;
+      justify-content: stretch;
+      flex-direction: column;
+    }
+  }
+
+  &__image {
+    flex: 1;
+    width: 50%;
+    padding: 30px;
+    background: $white url("/src/assets/images/backgrounds/general-error-bg.png") no-repeat center bottom;
+    @include flex(flex-start, flex-start);
+    background-size: contain;
+
+    &-logo {
+      display: block;
+      @include fix-image(150)
+    }
+
+    @include break-md {
+      width: 100%;
+      flex: 0;
+      align-items: center;
+    }
+
+    @include break-xs {
+      background: $white;
+      justify-content: center;
+    }
+  }
+
+  &__content {
+    flex: 1;
+    width: 50%;
+    padding: 30px;
+    min-height: 100vh;
+    background-color: $gray-200;
+    @include flex(space-between, stretch, column);
+
+    @include break-md {
+      flex: 1;
+      width: 100%;
+      min-height: 0;
+    }
+
+    &-buttons {
+      &-item {
+        margin-top: 15px;
+      }
+    }
+
+    &-message {
+      flex: 1;
+      @include flex(flex-start, stretch, column);
+
+      &-title {
+        display: block;
+        text-align: center;
+        @include write-font(16px, $f-bold, $gray-600);
+        margin-top: 10px;
+
+        &-code {
+          display: block;
+          text-align: center;
+          @include write-font(30px, $f-bold, $project-1);
+        }
+      }
+
+      &-line {
+        @include flex(flex-start, center);
+        padding: 10px 15px;
+        border-radius: 3px;
+        border: 1px solid $red;
+        margin-top: 15px;
+        background: color-alpha($red, .2);
+
+        strong, em {
+          display: block;
+          width: 140px;
+          flex-shrink: 0;
+          @include write-font(14px, $f-bold, $gray-900);
+        }
+
+        span {
+          display: block;
+          @include write-font(14px, $f-normal, $gray-700);
+        }
+
+        em {
+          display: block;
+          width: auto;
+          margin-right: 40px;
+          height: 35px;
+          border-right: 1px solid $red;
+        }
+      }
+    }
+
+    &-effect {
+      display: block;
+      margin: 20px 0;
+    }
+  }
+
+  &__warning {
+    background-color: color-alpha($black, .8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: 100vh;
+    z-index: 999999;
+    @include flex(center, center);
+
+    &-content {
+      margin: 20px 0;
+      max-width: 50%;
+      border-radius: 10px;
+      height: auto;
+      min-height: 0;
+    }
+  }
+
+  &__network {
+    background-color: $white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: 100vh;
+    opacity: 0;
+    z-index: -99;
+    display: none;
+    pointer-events: none;
+    @include trans(opacity);
+
+    &-message {
+      margin: 20px 0;
+
+      &-title {
+        display: block;
+        text-align: center;
+        @include write-font(16px, $f-bold, $project-1);
+      }
+
+      &-info {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        @include write-font(14px, $f-semi-bold, $gray-700);
+      }
+    }
+
+    &--show {
+      display: block;
+      opacity: 1;
+      z-index: 999999;
+      pointer-events: all;
+    }
+  }
+
+  &__network & {
+    &__image {
+      background-image: url("/src/assets/images/backgrounds/connection-error-bg.png");
+    }
+  }
+
+  &__loader {
+    background-color: $white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: 100vh;
+
+    &-content {
+      justify-content: center;
+
+      &-title {
+        display: block;
+        text-align: left;
+        @include write-font(16px, $f-bold, $project-1);
+      }
+    }
+
+    &-list {
+      margin-top: 25px;
+
+      &-item {
+        @include flex(space-between, center);
+        margin-bottom: 5px;
+
+        &-effect {
+          width: 25px;
+          @include fix-image();
+        }
+
+        &-text {
+          margin-left: 10px;
+          @include write-font(14px, $f-normal, $project-2);
+          flex: 1;
+        }
+
+        &-counter {
+          @include write-font(14px, $f-normal, $project-1);
+        }
+      }
+    }
+  }
+
+  &__loader & {
+    &__image {
+      background-image: url("/src/assets/images/backgrounds/loading-bg.png");
+    }
+  }
+
+  &__loading {
+    background-color: color-alpha($black, .8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: 100vh;
+    z-index: 999999;
+    @include flex(center, center);
+
+    &-container {
+      margin: 20px 0;
+      max-width: 50%;
+      border-radius: 10px;
+      height: auto;
+      min-height: 0;
+    }
+
+    &-content {
+      margin-top: 20px;
+
+      &-title {
+        display: block;
+        text-align: center;
+        @include write-font(16px, $f-bold, $project-1);
+      }
+    }
+  }
+}

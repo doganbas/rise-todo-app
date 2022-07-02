@@ -1,0 +1,423 @@
+@import './functions';
+@import './variables';
+
+@mixin clear-after() {
+  &::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
+
+@mixin fix-image($max: 0) {
+  > img {
+    display: block;
+    width: 100%;
+    height: auto;
+    @content;
+
+    @if ($max > 0) {
+      max-width: #{$max + 'px'};
+    }
+  }
+}
+
+@mixin fix-background() {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+@mixin fix-after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+
+@mixin break-lg {
+  @include break-x($breakpoints-lg) {
+    @content;
+  }
+}
+
+@mixin break-md {
+  @include break-x($breakpoints-md) {
+    @content;
+  }
+}
+
+@mixin break-sm {
+  @include break-x($breakpoints-sm) {
+    @content;
+  }
+}
+
+@mixin break-xs {
+  @include break-x($breakpoints-xs) {
+    @content;
+  }
+}
+
+@mixin break-x($break) {
+  @media only screen and (max-width: $break) {
+    @content;
+  }
+}
+
+@mixin break-min-x($break) {
+  @media only screen and (min-width: $break) {
+    @content;
+  }
+}
+
+@mixin break-between-x($break-start, $break-end) {
+  @media only screen and (min-width: $break-start) and (max-width: $break-end) {
+    @content;
+  }
+}
+
+
+@mixin place-holder($fontWeight, $fontColor: '', $fontFrom: 0, $fontStyle: normal) {
+
+  &::-webkit-input-placeholder {
+    font-family: $default-font-family;
+    @include write-font(0, $fontWeight, $fontColor, $fontFrom, $fontStyle);
+    opacity: 1;
+  }
+
+  &::-moz-placeholder {
+    font-family: $default-font-family;
+    @include write-font(0, $fontWeight, $fontColor, $fontFrom, $fontStyle);
+    opacity: 1;
+  }
+
+  &:-ms-input-placeholder {
+    font-family: $default-font-family;
+    @include write-font(0, $fontWeight, $fontColor, $fontFrom, $fontStyle);
+    opacity: 1;
+  }
+
+  &:-moz-placeholder {
+    font-family: $default-font-family;
+    @include write-font(0, $fontWeight, $fontColor, $fontFrom, $fontStyle);
+    opacity: 1;
+  }
+
+  &::placeholder {
+    font-family: $default-font-family;
+    @include write-font(0, $fontWeight, $fontColor, $fontFrom, $fontStyle);
+    opacity: 1;
+  }
+}
+
+@mixin write-font($fontSize, $fontWeight: 400, $fontColor: '', $fontFrom: 0, $fontStyle: normal) {
+
+  @if $fontSize > 1 {
+    @if ($fontFrom > 0) {
+      font-size: calc-font-orj($fontSize, $fontFrom);
+    } @else {
+      font-size: calc-font($fontSize);
+    }
+  }
+
+  @if $fontSize < 1 {
+    font-size: 1em;
+  }
+
+  @if $fontColor {
+    color: $fontColor;
+  }
+
+  font-weight: $fontWeight;
+
+  @if $fontStyle != normal and unquote($fontStyle) {
+    font-style: $fontStyle;
+  }
+}
+
+@mixin trans-color() {
+  transition: color $transition-time $transition-timing;
+}
+
+@mixin trans-bg() {
+  transition: background $transition-time $transition-timing;
+}
+
+@mixin trans-opacity() {
+  transition: opacity $transition-time $transition-timing;
+}
+
+@mixin trans-color-bg() {
+  transition: color $transition-time $transition-timing, background $transition-time $transition-timing;
+}
+
+@mixin trans-hover($transitionType: color, $otherObject: '') {
+  transition: #{$transitionType} #{$transition-time} #{$transition-timing};
+
+  &:hover {
+    @content;
+  }
+
+  @if ($otherObject != "") {
+    &#{$otherObject} {
+      @content;
+    }
+  }
+}
+
+@mixin trans($transitionType, $transitionType2: null, $transitionType3: null, $transitionType4: null) {
+
+  @if $transitionType3 != null {
+    transition: $transitionType $transition-time $transition-timing, $transitionType2 $transition-time $transition-timing, $transitionType3 $transition-time $transition-timing, $transitionType4 $transition-time $transition-timing;
+  } @else if $transitionType3 != null {
+    transition: $transitionType $transition-time $transition-timing, $transitionType2 $transition-time $transition-timing, $transitionType3 $transition-time $transition-timing;
+  } @else if $transitionType2 != null {
+    transition: $transitionType $transition-time $transition-timing, $transitionType2 $transition-time $transition-timing;
+  } @else {
+    transition: $transitionType $transition-time $transition-timing;
+  }
+}
+
+
+@mixin flex($justify: space-between, $align: center, $direction: row, $wrap: nowrap) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+}
+
+@mixin flex-grid($col, $space, $prefix: -item, $space-vertical: $space, $justify: space-between, $align: stretch, $direction: row) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+  flex-wrap: wrap;
+
+  @include flex-grid-item($col, $space, $prefix, $space-vertical) {
+    @content;
+  }
+
+  &:after {
+    content: '';
+    flex: auto;
+  }
+}
+
+@mixin flex-grid-res($col-xl, $col-lg, $col-md, $col-sm, $col-xs, $space, $prefix: -item, $space-vertical: $space, $justify: space-between, $align: stretch, $direction: row) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+  flex-wrap: wrap;
+
+  @media only screen and (min-width: $breakpoints-lg) {
+    @include flex-grid-item($col-xl, $space, $prefix, $space-vertical) {
+      @content;
+    }
+  }
+
+  @media only screen and (min-width: $breakpoints-md) and (max-width: $breakpoints-lg) {
+    @include flex-grid-item($col-lg, $space, $prefix, $space-vertical) {
+      @content;
+    }
+  }
+
+  @media only screen and (min-width: $breakpoints-sm) and (max-width: $breakpoints-md) {
+    @include flex-grid-item($col-md, $space, $prefix, $space-vertical) {
+      @content;
+    }
+  }
+
+  @media only screen and (min-width: $breakpoints-xs) and (max-width: $breakpoints-sm) {
+    @include flex-grid-item($col-sm, $space, $prefix, $space-vertical) {
+      @content;
+    }
+  }
+
+  @media only screen and (max-width: $breakpoints-xs) {
+    @include flex-grid-item($col-xs, $space, $prefix, $space-vertical) {
+      @content;
+    }
+  }
+
+  &:after {
+    content: "";
+    flex: auto;
+  }
+}
+
+@mixin flex-grid-res-full($col-xl, $col-lg, $col-md, $col-sm, $col-xs, $space-xl, $space-lg, $space-md, $space-sm, $space-xs, $prefix: -item, $space-vertical: $space-xl, $justify: space-between, $align: stretch, $direction: row) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+  flex-wrap: wrap;
+
+  @media only screen and (min-width: $breakpoints-lg) {
+    @include flex-grid-item($col-xl, $space-xl, $prefix, $space-vertical) {
+      @content;
+    }
+  }
+
+  @media only screen and (min-width: $breakpoints-md) and (max-width: $breakpoints-lg) {
+    @include flex-grid-item($col-lg, $space-lg, $prefix, $space-vertical) {
+      @content;
+    }
+  }
+
+  @media only screen and (min-width: $breakpoints-sm) and (max-width: $breakpoints-md) {
+    @include flex-grid-item($col-md, $space-md, $prefix, $space-vertical) {
+      @content;
+    }
+  }
+
+  @media only screen and (min-width: $breakpoints-xs) and (max-width: $breakpoints-sm) {
+    @include flex-grid-item($col-sm, $space-sm, $prefix, $space-vertical) {
+      @content;
+    }
+  }
+
+  @media only screen and (max-width: $breakpoints-xs) {
+    @include flex-grid-item($col-xs, $space-xs, $prefix, $space-vertical) {
+      @content;
+    }
+  }
+
+  &:after {
+    content: "";
+    flex: auto;
+  }
+}
+
+@mixin flex-grid-item($col, $space, $prefix, $space-vertical) {
+  @if (str-index($prefix, 'dot-')) {
+    .#{str-replace($prefix, 'dot-', '')} {
+      @if ($space == 0) {
+        width: calc(((100%) / #{$col}) - 0.0001px);
+      }
+
+      @if ($space > 0) {
+        width: calc(((100% - (#{($col - 1) + ' * ' + $space + 'px'})) / #{$col}) - 0.0001px);
+      }
+
+      @if ($col > 1) {
+        margin-left: $space#{'px'};
+      }
+
+      margin-bottom: $space-vertical#{'px'};
+      @content;
+
+      @if ($col > 1) {
+        &:nth-child(#{$col}n+1) {
+          margin-left: 0;
+        }
+      }
+    }
+  } @else {
+    &#{$prefix} {
+      @if ($space == 0) {
+        width: calc(((100%) / #{$col}) - 0.0001px);
+      }
+
+      @if ($space > 0) {
+        width: calc(((100% - (#{($col - 1) + ' * ' + $space + 'px'})) / #{$col}) - 0.0001px);
+      }
+
+      @if ($col > 1) {
+        margin-left: $space#{'px'};
+      }
+
+      margin-bottom: $space-vertical#{'px'};
+      @content;
+
+      @if ($col > 1) {
+        &:nth-child(#{$col}n+1) {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+
+@mixin flex-grid-all($col, $space, $prefix: item, $space-vertical: $space, $justify: space-between, $align: stretch, $direction: row) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+  flex-wrap: wrap;
+
+  @include flex-grid-all-item($col, $space, $prefix, $space-vertical) {
+    @content;
+  }
+
+  &:after {
+    content: "";
+    flex: auto;
+  }
+}
+
+@mixin flex-grid-all-res($col-xl, $col-lg, $col-md, $col-sm, $col-xs, $space, $prefix: -item, $space-vertical: $space, $justify: space-between, $align: stretch, $direction: row) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+  flex-wrap: wrap;
+
+  @media only screen and (min-width: $breakpoints-lg) {
+    @include flex-grid-all-item($col-xl, $space, $prefix, $space-vertical) {
+      @content;
+    }
+  }
+
+  @media only screen and (min-width: $breakpoints-md) and (max-width: $breakpoints-lg) {
+    @include flex-grid-all-item($col-lg, $space, $prefix, $space-vertical) {
+      @content;
+    }
+  }
+
+  @media only screen and (min-width: $breakpoints-sm) and (max-width: $breakpoints-md) {
+    @include flex-grid-all-item($col-md, $space, $prefix, $space-vertical) {
+      @content;
+    }
+  }
+
+  @media only screen and (min-width: $breakpoints-xs) and (max-width: $breakpoints-sm) {
+    @include flex-grid-all-item($col-sm, $space, $prefix, $space-vertical) {
+      @content;
+    }
+  }
+
+  @media only screen and (max-width: $breakpoints-xs) {
+    @include flex-grid-all-item($col-xs, $space, $prefix, $space-vertical) {
+      @content;
+    }
+  }
+
+  &:after {
+    content: "";
+    flex: auto;
+  }
+}
+
+@mixin flex-grid-all-item($col, $space, $prefix, $space-vertical) {
+  @if (str-index($prefix, 'dot-')) {
+    .#{str-replace($prefix, 'dot-', '')} {
+      width: calc(((100% - (#{(($col) * 2) +' * ' + $space + 'px'})) / #{$col}) - 0.0001px);
+      margin-left: $space#{'px'};
+      margin-right: $space#{'px'};
+      @content;
+    }
+  } @else {
+    &#{$prefix} {
+      width: calc(((100% - (#{(($col) * 2) +' * ' + $space + 'px'})) / #{$col}) - 0.0001px);
+      margin-left: $space#{'px'};
+      margin-right: $space#{'px'};
+      @content;
+    }
+  }
+}
