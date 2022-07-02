@@ -1,6 +1,8 @@
 export interface TodoPriorityModel {
     uuid: string,
-    name: TodoPriorityLocalizationModel[]
+    name: TodoPriorityLocalizationModel[],
+    order: number,
+    color: string
 }
 
 export interface TodoPriorityLocalizationModel {

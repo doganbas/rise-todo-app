@@ -44,9 +44,9 @@ export const todoPriorityActionCreators = {
 
         ///TODO Fetch data from NodeJs
         const fakeModel: TodoPriorityModel[] = [
-            {uuid: generateUUID(), name: [{languageGlobalName: 'tr', value: 'Acil'}, {languageGlobalName: 'en', value: 'Urgent'}]},
-            {uuid: generateUUID(), name: [{languageGlobalName: 'tr', value: 'Önemli'}, {languageGlobalName: 'en', value: 'Important'}]},
-            {uuid: generateUUID(), name: [{languageGlobalName: 'tr', value: 'Normal'}, {languageGlobalName: 'en', value: 'Normal'}]},
+            {uuid: generateUUID(), name: [{languageGlobalName: 'tr', value: 'Acil'}, {languageGlobalName: 'en', value: 'Urgent'}], order: 1, color: '#ff6038'},
+            {uuid: generateUUID(), name: [{languageGlobalName: 'tr', value: 'Önemli'}, {languageGlobalName: 'en', value: 'Important'}], order: 2, color: '#3870ff'},
+            {uuid: generateUUID(), name: [{languageGlobalName: 'tr', value: 'Normal'}, {languageGlobalName: 'en', value: 'Normal'}], order: 3, color: '#9fff38'}
         ];
         setTimeout(() => {
             dispatch({type: 'RECEIVE_TODO_PRIORITY_ACTION', priorityList: fakeModel});
