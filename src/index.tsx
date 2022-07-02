@@ -2,9 +2,9 @@ import {Provider} from 'react-redux';
 import React, {useEffect} from 'react';
 import {PersistGate} from 'redux-persist/integration/react';
 import ApplicationProvider from './components/providers/ApplicationProvider';
-import TestComponent from './components/test/TestComponent';
 import {setFetchApiDefault} from './config/fetchApiConfig';
 import {persistStorage, store} from './config/storeConfig';
+import Layout from './views/shared/Layout';
 import '/src/assets/styles/base.scss';
 
 const App = () => {
@@ -17,7 +17,7 @@ const App = () => {
         <Provider store={store}>
             <PersistGate persistor={persistStorage}>
                 <ApplicationProvider>
-                    <TestComponent/>
+                    <Layout/>
                 </ApplicationProvider>
             </PersistGate>
         </Provider>

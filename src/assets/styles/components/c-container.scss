@@ -27,4 +27,24 @@
     width: $container-xs;
     padding: 0 $container-padding-xs;
   }
+
+  &-padding {
+    padding: 0 $container-padding-xl;
+
+    @include break-lg() {
+      padding: 0 $container-padding-lg;
+    }
+
+    @include break-md() {
+      padding: 0 $container-padding-md;
+    }
+
+    @include break-sm() {
+      padding: 0 $container-padding-sm;
+    }
+
+    @include break-xs() {
+      padding: 0 $container-padding-xs;
+    }
+  }
 }

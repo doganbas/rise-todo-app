@@ -21,18 +21,18 @@ $container-padding-xs: 15px !default;
 
 /* fonts */
 
-$default-font-family: helvetica neue, segoe ui, helvetica, verdana, sans-serif !default;
-$default-font-family-only: helvetica neue, segoe ui !default;
+$default-font-family: 'Lato', sans-serif !default;
+$default-font-family-only: 'Lato' !default;
 $default-font-size: 14px !default;
 
-$f-100: 100 !default;
+$f-100: 300 !default;
 $f-200: 300 !default;
 $f-300: 300 !default;
 $f-400: 400 !default;
-$f-500: 500 !default;
-$f-600: 500 !default;
+$f-500: 400 !default;
+$f-600: 700 !default;
 $f-700: 700 !default;
-$f-800: 700 !default;
+$f-800: 900 !default;
 $f-900: 900 !default;
 
 $f-thin: $f-100 !default;
