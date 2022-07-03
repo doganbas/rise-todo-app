@@ -1,0 +1,94 @@
+/* sizes */
+
+$container-xl: 1280px !default;
+$container-lg: 992px !default;
+$container-md: 768px !default;
+$container-sm: 100% !default;
+$container-xs: 100% !default;
+$container-xx: 320px !default;
+
+$breakpoints-lg: 1380px !default;
+$breakpoints-md: 1100px !default;
+$breakpoints-sm: 780px !default;
+$breakpoints-xs: 500px !default;
+$breakpoints-xx: 350px !default;
+
+$container-padding-xl: 20px !default;
+$container-padding-lg: 20px !default;
+$container-padding-md: 15px !default;
+$container-padding-sm: 15px !default;
+$container-padding-xs: 15px !default;
+
+/* fonts */
+
+$default-font-family: 'Open Sans', sans-serif !default;
+$default-font-family-only: 'Open Sans' !default;
+$default-font-size: 14px !default;
+
+$f-100: 300 !default;
+$f-200: 300 !default;
+$f-300: 300 !default;
+$f-400: 400 !default;
+$f-500: 400 !default;
+$f-600: 700 !default;
+$f-700: 700 !default;
+$f-800: 900 !default;
+$f-900: 900 !default;
+
+$f-thin: $f-100 !default;
+$f-light: $f-300 !default;
+$f-normal: $f-400 !default;
+$f-semi-bold: $f-500 !default;
+$f-bold: $f-700 !default;
+$f-black: $f-900 !default;
+
+/* colors */
+
+$white: #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black: #000 !default;
+
+$blue: #007bff !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc107 !default;
+$green: #80c343 !default;
+$teal: #20c997 !default;
+$cyan: #17a2b8 !default;
+
+$project-1: #5a54ff !default;
+$project-2: #f44e4e !default;
+$project-3: #fdc510 !default;
+$project-4: #a7adff !default;
+$project-5: #fae026 !default;
+$project-6: #5a54ff !default;
+$project-7: #d7384e !default;
+$project-8: #e7ecee !default;
+
+/* global */
+
+$image-loader: url("/src/assets/images/brands/loading.svg") !default;
+$body-background: $project-8 !default;
+
+$selection-background: $project-7 !default;
+$selection-color: $white !default;
+
+$scrollbar-width: 7px !default;
+$scrollbar-track-bg: $gray-300 !default;
+$scrollbar-thumb-bg: $gray-700 !default;
+$scrollbar-thumb-hover-bg: $project-1 !default;
+$scrollbar-button-bg: $gray-900 !default;
+
+$transition-time: .3s !default;
+$transition-timing: ease-in-out !default;

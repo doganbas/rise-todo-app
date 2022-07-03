@@ -1,0 +1,50 @@
+@import "../utils/variables";
+@import "../utils/mixins";
+
+.c-container {
+  position: relative;
+  box-sizing: border-box;
+  width: $container-xl;
+  padding: 0 $container-padding-xl;
+  margin: 0 auto;
+
+  @include break-lg() {
+    width: $container-lg;
+    padding: 0 $container-padding-lg;
+  }
+
+  @include break-md() {
+    width: $container-md;
+    padding: 0 $container-padding-md;
+  }
+
+  @include break-sm() {
+    width: $container-sm;
+    padding: 0 $container-padding-sm;
+  }
+
+  @include break-xs() {
+    width: $container-xs;
+    padding: 0 $container-padding-xs;
+  }
+
+  &-padding {
+    padding: 0 $container-padding-xl;
+
+    @include break-lg() {
+      padding: 0 $container-padding-lg;
+    }
+
+    @include break-md() {
+      padding: 0 $container-padding-md;
+    }
+
+    @include break-sm() {
+      padding: 0 $container-padding-sm;
+    }
+
+    @include break-xs() {
+      padding: 0 $container-padding-xs;
+    }
+  }
+}

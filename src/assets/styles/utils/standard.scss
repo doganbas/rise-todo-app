@@ -1,0 +1,52 @@
+@import "./mixins";
+
+body {
+  min-width: $container-xl;
+  height: 100%;
+  margin: 0;
+  font-family: $default-font-family;
+  font-size: $default-font-size;
+  font-weight: $f-100;
+  background: $body-background;
+
+
+  @include break-lg () {
+    min-width: $container-lg;
+  }
+
+  @include break-md () {
+    min-width: $container-md;
+    font-size: 13px;
+  }
+
+  @include break-sm () {
+    min-width: $container-xx;
+  }
+}
+
+::selection {
+  color: $selection-color;
+  background: $selection-background;
+}
+
+::-webkit-scrollbar {
+  appearance: none;
+  width: $scrollbar-width;
+  height: $scrollbar-width;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .3);
+  border-radius: 4px;
+  box-shadow: 0 0 1px rgba(255, 255, 255, .3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $scrollbar-thumb-hover-bg;
+}
+
+img[src$=".jpg"] {
+  display: block;
+  background: $image-loader;
+  @include trans(all);
+}

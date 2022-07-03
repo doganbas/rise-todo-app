@@ -1,0 +1,101 @@
+@import "../utils/variables";
+@import "../utils/mixins";
+
+.c-layout {
+  min-height: 100vh;
+  @include flex(space-between, stretch, column);
+
+  &__header {
+    background-color: $white;
+    border-bottom: 1px solid $gray-400;
+
+    &-content {
+      @include flex(space-between, center);
+      padding: 25px 0;
+
+      @include break-xs {
+        flex-direction: column;
+        padding: 10px 0;
+      }
+    }
+
+    &-logo {
+      display: block;
+      @include fix-image(160);
+    }
+
+    &-functions {
+      @include break-xs {
+        margin-top: 10px;
+      }
+
+      &-item {
+        margin-left: 15px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__footer {
+    border-top: 1px solid $gray-400;
+    background-color: $gray-300;
+
+    &-content {
+      padding: 25px 0;
+      @include flex(space-between, center);
+
+      @include break-xs {
+        flex-direction: column;
+        padding: 15px 0;
+      }
+    }
+
+    &-link {
+      @include flex(flex-start, center);
+
+      i {
+        width: 30px;
+        height: 30px;
+        @include flex(center, center);
+        font-size: calc-font(16px);
+        color: $white;
+        background-color: $gray-700;
+        border-radius: 3px;
+        @include trans-bg;
+      }
+
+      span {
+        display: block;
+        padding-left: 10px;
+        @include write-font(14px, $f-normal, $gray-700);
+        text-decoration: underline;
+        @include trans-color;
+      }
+
+      &:hover {
+        i {
+          background-color: $black;
+        }
+
+        span {
+          color: $project-2;
+        }
+      }
+    }
+
+    &-copy {
+      @include write-font(14px, $f-normal, $gray-700);
+      @include break-xs {
+        margin-top: 15px;
+      }
+    }
+  }
+
+}

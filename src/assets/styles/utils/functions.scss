@@ -1,0 +1,23 @@
+@function calc-font($fontSize) {
+  $convertedValue: $fontSize / 14px;
+  @return #{$convertedValue}em;
+}
+
+@function calc-font-orj($fontSize, $originalSize) {
+  $convertedValue: $fontSize / $originalSize;
+  @return #{$convertedValue}em;
+}
+
+@function color-alpha($color, $opacity: .5) {
+  @return rgba($color, $opacity);
+}
+
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
