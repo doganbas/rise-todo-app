@@ -1,16 +1,17 @@
 import {useTranslation} from 'react-i18next';
 import {useDispatch, useSelector} from 'react-redux';
 import React, {FunctionComponent, useEffect, useState} from 'react';
-import {Button, Col, Input, Row, Space, Table, Tag, Tooltip} from 'antd';
-import {DeleteOutlined, EditOutlined, SearchOutlined} from '@ant-design/icons';
+import {Button, Col, Input, Modal, notification, Row, Space, Table, Tag, Tooltip} from 'antd';
+import {DeleteOutlined, EditOutlined, ExclamationCircleOutlined, SearchOutlined} from '@ant-design/icons';
 import {todoPriorityActionCreators, TodoPriorityState} from '../../stores/todoPriorityStore';
 import {ApplicationLanguageState} from '../../stores/applicationLanguageStore';
 import PriorityDataHelper from '../../helpers/priorityDataHelper';
 import {ApplicationStates} from '../../stores/applicationStore';
 import PrioritySelect from '../forms/PrioritySelect';
-import {TodoState} from '../../stores/todoStore';
+import {todoActionCreators, TodoState} from '../../stores/todoStore';
 import {TodoModel} from '../../models/todoModel';
 import {CustomThunkDispatch} from '../../types';
+import TodoEditForm from '../forms/TodoEditForm';
 
 const TodoList: FunctionComponent = () => {
     const dispatch = useDispatch<CustomThunkDispatch>();
@@ -21,6 +22,7 @@ const TodoList: FunctionComponent = () => {
     const [todoList, setTodoList] = useState<TodoModel[]>();
     const [filterName, setFilterName] = useState<string | undefined>();
     const [filterPriority, setFilterPriority] = useState<string | undefined>();
+    const [editModal, setEditModal] = useState<{ todoItem?: TodoModel, isVisible: boolean }>({isVisible: false});
 
     useEffect(() => {
         dispatch(todoPriorityActionCreators.checkTodoPriorityData());
@@ -40,10 +42,33 @@ const TodoList: FunctionComponent = () => {
 
     const handleClickEditButton = (todoItem: TodoModel) => {
         console.log(todoItem);
+        setEditModal({todoItem: todoItem, isVisible: true});
     }
 
     const handleClickDeleteButton = (todoItem: TodoModel) => {
-        console.log(todoItem);
+        Modal.confirm({
+            title: t('todo-delete-item-confirm-title', 'Seçmiş olduğunuz görevi silmek istiyor musunuz?'),
+            icon: <ExclamationCircleOutlined/>,
+            content: t('todo-delete-item-confirm-content', 'Seçmiş olduğunuz görev kalıcı olarak silinecektir.'),
+            okText: t('confirm-ok-button-text', 'Onayla'),
+            cancelText: t('confirm-cancel-button-text', 'Vazgeç'),
+            onOk() {
+                dispatch(todoActionCreators.removeTodo(todoItem));
+                notification['success']({
+                    message: t('notification-success-title', 'Görev Başarıyla Tamamlandı!'),
+                    description: t('todo-delete-item-success', '\'{{todo_name}}\' isimli görev başarı ile kaldırılmıştır.', {todo_name: todoItem.jobTitle})
+                });
+            }
+        });
+    }
+
+    const handleUpdateTodoItem = (todoItem: TodoModel) => {
+        dispatch(todoActionCreators.updateTodo(todoItem));
+        setEditModal({todoItem: undefined, isVisible: false});
+        notification['success']({
+            message: t('notification-success-title', 'Görev Başarıyla Tamamlandı!'),
+            description: t('todo-update-item-success', '\'{{todo_name}}\' isimli görev önceliği başarı ile değiştirilmiştir.', {todo_name: todoItem.jobTitle})
+        });
     }
 
     const renderJobName = (jobName: string, todoItem: TodoModel): React.ReactNode => {
@@ -136,13 +161,23 @@ const TodoList: FunctionComponent = () => {
                                         <Button type="primary" icon={<EditOutlined/>} size="middle" onClick={() => handleClickEditButton(record)}/>
                                     </Tooltip>
                                     <Tooltip placement="top" title={t('todo-table-delete-action-title', 'Sil')}>
-                                        <Button type="primary" icon={<DeleteOutlined/>} size="middle" onClick={() => handleClickDeleteButton(record)}/>
+                                        <Button type="primary" icon={<DeleteOutlined/>} size="middle" onClick={() => handleClickDeleteButton(record)} danger/>
                                     </Tooltip>
                                 </Space>
                             )}
                         />
                     </Table>
                 </div>
+
+                <Modal footer={false} visible={editModal.isVisible} closable={false}>
+                    <TodoEditForm
+                        todoItem={editModal.todoItem}
+                        onComplete={handleUpdateTodoItem}
+                        onCancel={() => {
+                            setEditModal({todoItem: undefined, isVisible: false});
+                        }}
+                    />
+                </Modal>
             </div>
         </div>
     )
