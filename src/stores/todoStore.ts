@@ -4,11 +4,7 @@ import {TodoModel} from '../models/todoModel';
 import {CustomThunkDispatch} from '../types';
 
 export interface TodoState {
-    todoList: TodoModel[],
-    filterByPriority?: string,
-    filterByTitle?: string,
-    orderType: 'date' | 'name' | 'priority',
-    order: 'asc' | 'desc'
+    todoList: TodoModel[]
 }
 
 interface UpdateTodoListAction {
@@ -16,24 +12,14 @@ interface UpdateTodoListAction {
     todoList: TodoModel[]
 }
 
-interface ChangeFilterTodoListAction {
-    type: 'CHANGE_FILTER_TODO_LIST_ACTION',
-    filterByPriority?: string,
-    filterByTitle?: string
+interface ClearTodoListAction {
+    type: 'CLEAR_TODO_LIST_ACTION'
 }
 
-interface ChangeOrderTodoListAction {
-    type: 'CHANGE_ORDER_TODO_LIST_ACTION',
-    orderType: 'date' | 'name' | 'priority',
-    order: 'asc' | 'desc'
-}
-
-type KnownAction = UpdateTodoListAction | ChangeFilterTodoListAction | ChangeOrderTodoListAction;
+type KnownAction = UpdateTodoListAction | ClearTodoListAction;
 
 const unloadedState: TodoState = {
-    todoList: [],
-    order: 'desc',
-    orderType: 'date'
+    todoList: []
 }
 
 export const todoActionCreators = {
@@ -66,11 +52,8 @@ export const todoActionCreators = {
         updateList.splice(removeItem, 1);
         dispatch({type: 'UPDATE_TODO_LIST_ACTION', todoList: updateList});
     },
-    filterTodo: (filterByPriority?: string, filterByTitle?: string): AppThunkAction<KnownAction> => (dispatch) => {
-        dispatch({type: 'CHANGE_FILTER_TODO_LIST_ACTION', filterByTitle: filterByTitle, filterByPriority: filterByPriority});
-    },
-    orderTodo: (orderType: 'date' | 'name' | 'priority', order: 'asc' | 'desc'): AppThunkAction<KnownAction> => (dispatch) => {
-        dispatch({type: 'CHANGE_ORDER_TODO_LIST_ACTION', orderType: orderType, order: order});
+    clearTodo: (): AppThunkAction<KnownAction> => (dispatch) => {
+        dispatch({type: 'CLEAR_TODO_LIST_ACTION'});
     }
 }
 
@@ -86,17 +69,9 @@ export const todoReducer: Reducer<TodoState> = (state: TodoState | undefined, in
                 ...state,
                 todoList: action.todoList
             }
-        case 'CHANGE_FILTER_TODO_LIST_ACTION':
+        case 'CLEAR_TODO_LIST_ACTION':
             return {
-                ...state,
-                filterByTitle: action.filterByTitle,
-                filterByPriority: action.filterByPriority
-            }
-        case 'CHANGE_ORDER_TODO_LIST_ACTION':
-            return {
-                ...state,
-                orderType: action.orderType,
-                order: action.order
+                todoList: []
             }
     }
 

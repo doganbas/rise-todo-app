@@ -35,7 +35,7 @@ export const todoPriorityActionCreators = {
         const globalDispatch = dispatch as CustomThunkDispatch;
         const activeState = getState() as ApplicationStates;
 
-        if (activeState.TodoPriorityState.lastSync == null || DateHelper.timeDiff(activeState.TodoPriorityState.lastSync, null, 'hour') > 12)
+        if (!activeState.TodoPriorityState.isFetching && (activeState.TodoPriorityState.lastSync == null || DateHelper.timeDiff(activeState.TodoPriorityState.lastSync, null, 'hour') > 12))
             globalDispatch(todoPriorityActionCreators.getTodoPriorityData());
     },
     getTodoPriorityData: (): AppThunkAction<KnownAction> => (dispatch) => {

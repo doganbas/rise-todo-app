@@ -1,11 +1,14 @@
 import moment from 'moment';
 import i18next from 'i18next';
+import {ConfigProvider} from 'antd';
 import {useDispatch, useSelector} from 'react-redux';
 import React, {FunctionComponent, PropsWithChildren, useEffect} from 'react';
 import {applicationLanguageActionCreators, ApplicationLanguageState} from '../../stores/applicationLanguageStore';
 import {ApplicationStates} from '../../stores/applicationStore';
 import {CustomThunkDispatch, Nullable} from '../../types';
 import {LanguageModel} from '../../models/languageModel';
+import AntTr from 'antd/lib/locale/tr_TR';
+import AntEn from 'antd/lib/locale/en_US';
 
 const ApplicationLanguageProvider: FunctionComponent<PropsWithChildren> = (props) => {
     const dispatch = useDispatch<CustomThunkDispatch>();
@@ -43,7 +46,7 @@ const ApplicationLanguageProvider: FunctionComponent<PropsWithChildren> = (props
     return (
         <>
             {
-                languageState.completeLocalization && languageState.activeLanguage && i18next.isInitialized ? props.children : <div/>
+                languageState.completeLocalization && languageState.activeLanguage && i18next.isInitialized ? <ConfigProvider locale={languageState.activeLanguage.globalName == 'en' ? AntEn : AntTr}>{props.children}</ConfigProvider> : <div/>
             }
         </>
     );

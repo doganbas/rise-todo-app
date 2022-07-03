@@ -1,0 +1,55 @@
+@import "../utils/variables";
+@import "../utils/mixins";
+
+.c-todo-list {
+  &__title {
+    @include flex(space-between, center);
+
+    &-text {
+      font-size: 2em;
+    }
+
+    &-count {
+      @include write-font(14px, $f-normal, $gray-600);
+
+      &:before {
+        content: "(";
+      }
+
+      &:after {
+        content: ")";
+      }
+    }
+  }
+
+  &__filter {
+    padding: 10px;
+    margin-top: 15px;
+    background-color: $gray-300;
+
+    &-job-name {
+      em {
+        display: inline-block;
+        font-style: normal;
+        font-weight: bold;
+
+        &:before {
+          content: "(";
+        }
+
+        &:after {
+          content: ")";
+        }
+      }
+
+      @include break-min-x(575px) {
+        color: $black !important;
+
+        em {
+          display: none;
+
+        }
+      }
+    }
+  }
+}
