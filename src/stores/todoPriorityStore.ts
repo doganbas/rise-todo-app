@@ -1,8 +1,12 @@
 import {Action, Reducer} from 'redux';
+import fetchApi, {AxiosError} from 'axios';
 import {applicationLoaderActionCreators} from './applicationLoaderStore';
+import {applicationErrorActionCreators} from './applicationErrorStore';
 import {ApplicationStates, AppThunkAction} from './applicationStore';
 import {TodoPriorityModel} from '../models/todoPriorityModel';
+import applicationConfig from '../config/applicationConfig';
 import {CustomThunkDispatch, Nullable} from '../types';
+import {ExceptionType} from '../enums/exceptionType';
 import generateUUID from '../helpers/uuidHelper';
 import DateHelper from '../helpers/dateHelper';
 import {LoaderType} from '../enums/loaderType';
@@ -35,23 +39,21 @@ export const todoPriorityActionCreators = {
         const globalDispatch = dispatch as CustomThunkDispatch;
         const activeState = getState() as ApplicationStates;
 
-        if (!activeState.TodoPriorityState.isFetching && (activeState.TodoPriorityState.lastSync == null || DateHelper.timeDiff(activeState.TodoPriorityState.lastSync, null, 'hour') > 12))
+        if (!activeState.TodoPriorityState.isFetching && (activeState.TodoPriorityState.lastSync == null || activeState.TodoPriorityState.priorityList.length == 0 || DateHelper.timeDiff(activeState.TodoPriorityState.lastSync, null, 'hour') > 12))
             globalDispatch(todoPriorityActionCreators.getTodoPriorityData());
     },
     getTodoPriorityData: (): AppThunkAction<KnownAction> => (dispatch) => {
         const loaderId = generateUUID();
         const globalDispatch = dispatch as CustomThunkDispatch;
 
-        ///TODO Fetch data from NodeJs
-        const fakeModel: TodoPriorityModel[] = [
-            {uuid: generateUUID(), name: [{languageGlobalName: 'tr', value: 'Acil'}, {languageGlobalName: 'en', value: 'Urgent'}], order: 1, color: '#ff6038'},
-            {uuid: generateUUID(), name: [{languageGlobalName: 'tr', value: 'Önemli'}, {languageGlobalName: 'en', value: 'Important'}], order: 2, color: '#3870ff'},
-            {uuid: generateUUID(), name: [{languageGlobalName: 'tr', value: 'Normal'}, {languageGlobalName: 'en', value: 'Normal'}], order: 3, color: '#9fff38'}
-        ];
-        setTimeout(() => {
-            dispatch({type: 'RECEIVE_TODO_PRIORITY_ACTION', priorityList: fakeModel});
+        fetchApi.get<TodoPriorityModel[]>(applicationConfig.serviceUrls.getPriorityList).then((response) => {
+            const responseData = response.data;
+            dispatch({type: 'RECEIVE_TODO_PRIORITY_ACTION', priorityList: responseData});
+        }).catch((exception: AxiosError) => {
+            globalDispatch(applicationErrorActionCreators.generateApplicationError(exception.message, ExceptionType.error, exception.code, true));
+        }).finally(() => {
             globalDispatch(applicationLoaderActionCreators.hideGlobalLoader(loaderId));
-        }, 4000);
+        })
 
         globalDispatch(applicationLoaderActionCreators.showGlobalLoader({name: 'fetch-todo-priority-list', defaultTranslation: 'Durum verileride sunucudan alınıyor...'}, loaderId, LoaderType.inclusive));
         dispatch({type: 'REQUEST_TODO_PRIORITY_ACTION'});

@@ -27,5 +27,8 @@
       "single",
       "avoid-escape"
     ]
-  }
+  },
+  "ignorePatterns": [
+    "**/api/*.*"
+  ]
 }

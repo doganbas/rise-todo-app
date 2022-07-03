@@ -5,12 +5,12 @@ import {LanguageModel} from '../models/languageModel';
 
 const applicationConfig = {
     apiInfo: {
-        apiUrl: '',
-        apiDevUrl: '',
+        apiUrl: 'https://todoapi.doganbas.com/',
+        apiDevUrl: 'http://localhost:3000/',
         maxFetchSecond: 200
     },
     serviceUrls: {
-        getPriorityList: ''
+        getPriorityList: '/priority'
     },
     settings: {
         loadTimeOut: 15
