@@ -55,7 +55,7 @@ const ApplicationLoaderProvider: FunctionComponent<PropsWithChildren> = (props) 
     const renderFullLoader = () => {
         return (
             <div className="c-provider c-provider__loader">
-                <div className="c-provider-container">
+                <div className="c-provider-container">-
                     <div className="c-provider__image">
                         <a href={applicationConfig.brandInfo.brandLink} title={applicationConfig.brandInfo.brandName} className="c-provider__image-logo" target="_blank" rel="external noreferrer">
                             <img src={appLogo} alt={applicationConfig.brandInfo.brandName} width={60} height="auto"/>

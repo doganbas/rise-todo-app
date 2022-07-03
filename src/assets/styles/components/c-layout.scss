@@ -29,8 +29,12 @@
         margin-top: 10px;
       }
 
-      > ul {
-        border-bottom: none !important;
+      &-item {
+        margin-left: 15px;
+
+        &:first-child {
+          margin-left: 0;
+        }
       }
     }
   }

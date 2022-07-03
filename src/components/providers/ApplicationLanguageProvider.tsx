@@ -32,8 +32,9 @@ const ApplicationLanguageProvider: FunctionComponent<PropsWithChildren> = (props
         }
 
         if (languageState.activeLanguage) {
-            import(`moment/locale/${languageState.activeLanguage.globalName}`).then(() => {
-                moment.locale(languageState?.activeLanguage?.globalName ?? 'tr');
+            const importFile = languageState.activeLanguage.globalName == 'en' ? 'en-gb' : 'tr';
+            import(`moment/locale/${importFile}`).then(() => {
+                moment.locale(importFile);
             });
         }
 

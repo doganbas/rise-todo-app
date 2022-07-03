@@ -1,9 +1,9 @@
 import {Action, Reducer} from 'redux';
+import {ApplicationTranslationModel} from '../models/applicationTranslationModel';
 import {ApplicationLoaderModel} from '../models/applicationLoaderModel';
 import {AppThunkAction} from './applicationStore';
 import {LoaderType} from '../enums/loaderType';
 import {Nullable} from '../types';
-import {ApplicationTranslationModel} from '../models/applicationTranslationModel';
 
 export interface ApplicationLoaderState {
     isVisible: boolean,

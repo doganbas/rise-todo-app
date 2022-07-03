@@ -1,13 +1,13 @@
+import fetchApi from 'axios';
 import {Action, Reducer} from 'redux';
 import i18n, {Resource} from 'i18next';
-import fetchApi from 'axios';
 import {initReactI18next} from 'react-i18next';
-import {LanguageModel} from '../models/languageModel';
 import {applicationErrorActionCreators} from './applicationErrorStore';
 import {ApplicationStates, AppThunkAction} from './applicationStore';
 import applicationConfig from '../config/applicationConfig';
 import {CustomThunkDispatch, Nullable} from '../types';
 import {createBaseUrl} from '../config/fetchApiConfig';
+import {LanguageModel} from '../models/languageModel';
 import {ExceptionType} from '../enums/exceptionType';
 import {DevConsole} from '../helpers/consoleHelper';
 import {DataType} from '../enums/dataType';

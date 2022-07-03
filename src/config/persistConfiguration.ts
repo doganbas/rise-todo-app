@@ -4,11 +4,13 @@ const persistConfiguration = {
     key: 'root',
     storage: storage,
     whitelist: ([
-
+        'TodoPriorityState',
+        'TodoState'
     ]),
-    blacklist: ([
-
-    ])
+    blacklist: [
+        'ApplicationErrorState',
+        'ApplicationLoaderState'
+    ]
 };
 
 export default persistConfiguration;

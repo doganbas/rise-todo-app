@@ -1,0 +1,18 @@
+@import "../utils/variables";
+@import "../utils/mixins";
+
+.c-todo-add {
+  padding: 30px 0;
+
+  &__form {
+    margin-top: 25px;
+
+    &-button {
+      @include break-x(757px) {
+        .ant-form-item-label {
+          display: none !important;
+        }
+      }
+    }
+  }
+}
