@@ -1,17 +1,17 @@
+import {Col, notification, Row} from 'antd';
+import {useTranslation} from 'react-i18next';
+import {PlusOutlined} from '@ant-design/icons';
 import React, {FunctionComponent} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {ApplicationStates} from '../../stores/applicationStore';
+import {Form, Input, SubmitButton} from 'formik-antd';
+import {Formik, FormikHelpers, FormikProps} from 'formik';
 import {todoActionCreators, TodoState} from '../../stores/todoStore';
 import {ValidationService} from '../../service/validationService';
-import {useTranslation} from 'react-i18next';
-import {TodoModel} from '../../models/todoModel';
+import {ApplicationStates} from '../../stores/applicationStore';
 import generateUUID from '../../helpers/uuidHelper';
-import {Formik, FormikHelpers, FormikProps} from 'formik';
-import {Form, Input, SubmitButton} from 'formik-antd';
-import PrioritySelect from './PrioritySelect';
-import {PlusOutlined} from '@ant-design/icons';
+import {TodoModel} from '../../models/todoModel';
 import {CustomThunkDispatch} from '../../types';
-import {Col, notification, Row} from 'antd';
+import PrioritySelect from './PrioritySelect';
 
 const TodoAddForm: FunctionComponent = () => {
     const dispatch = useDispatch<CustomThunkDispatch>();

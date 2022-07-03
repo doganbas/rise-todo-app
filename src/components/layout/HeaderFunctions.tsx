@@ -1,13 +1,12 @@
-import {Button, Dropdown, Menu, Space} from 'antd';
 import exceljs from 'exceljs';
 import {useTranslation} from 'react-i18next';
 import React, {FunctionComponent} from 'react';
+import {Button, Dropdown, Menu, Space} from 'antd';
 import {useDispatch, useSelector} from 'react-redux';
 import {DownOutlined, ExportOutlined, GlobalOutlined, SettingOutlined} from '@ant-design/icons';
 import {applicationLanguageActionCreators, ApplicationLanguageState} from '../../stores/applicationLanguageStore';
+import PriorityDataHelper from '../../helpers/priorityDataHelper';
 import {TodoPriorityState} from '../../stores/todoPriorityStore';
-import {TodoPriorityModel} from '../../models/todoPriorityModel';
-import applicationConfig from '../../config/applicationConfig';
 import {ApplicationStates} from '../../stores/applicationStore';
 import {LanguageModel} from '../../models/languageModel';
 import DateHelper from '../../helpers/dateHelper';
@@ -20,11 +19,6 @@ const HeaderFunctions: FunctionComponent = () => {
     const todoPriorityState = useSelector<ApplicationStates, TodoPriorityState>(states => states.TodoPriorityState);
     const languageState = useSelector<ApplicationStates, ApplicationLanguageState>(states => states.ApplicationLanguageState);
     const {t} = useTranslation();
-
-    const translatePriorityName = (item: TodoPriorityModel): string => {
-        const activeLanguage = languageState.activeLanguage?.globalName ?? applicationConfig.languageInfo.activeLanguage;
-        return item.name.find(nq => nq.languageGlobalName == activeLanguage)?.value ?? '-';
-    }
 
     const handleClickExportData = () => {
         const todoPriorityList = todoPriorityState.priorityList;
@@ -59,7 +53,7 @@ const HeaderFunctions: FunctionComponent = () => {
         todoState.todoList.forEach((item, index) => {
             const itemPriority = todoPriorityList.find(nq => nq.uuid == item.jobPriority) ?? todoPriorityList.sort((a, b) => a.order - b.order)[0];
             workSheet.getCell(index + 2, 1).value = item.jobTitle;
-            workSheet.getCell(index + 2, 2).value = translatePriorityName(itemPriority);
+            workSheet.getCell(index + 2, 2).value = PriorityDataHelper.translatePriorityName(itemPriority, languageState.activeLanguage?.globalName);
             workSheet.getCell(index + 2, 2).style.fill = {
                 type: 'pattern',
                 pattern: 'solid',

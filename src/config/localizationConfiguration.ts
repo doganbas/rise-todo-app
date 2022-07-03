@@ -33,7 +33,21 @@ const localizationsTr = [
     {key: 'todo-add-form-dublicate-error-', value: 'Eklemek istediğiniz görev daha önce listeye eklenmiştir. Lütfen farklı bir görev tanımı deneyiniz.', dataType: DataType.string},
     {key: 'todo-add-form-submit-text', value: 'Oluştur', dataType: DataType.string},
     {key: 'todo-add-form-job-priority-chose', value: 'Seçiniz', dataType: DataType.string},
-    {key: 'todo-add-form-title', value: 'Yeni Görev Oluştur', dataType: DataType.string}
+    {key: 'todo-add-form-title', value: 'Yeni Görev Oluştur', dataType: DataType.string},
+    {key: 'todo-list-title', value: 'Görev Listesi', dataType: DataType.string},
+    {key: 'todo-filter-chose-priority', value: 'Öncelik Durumu Seçin', dataType: DataType.string},
+    {key: 'todo-filter-priority-all', value: 'Öncelik (Tümü)', dataType: DataType.string},
+    {key: 'todo-table-actions', value: 'İşlemler', dataType: DataType.string},
+    {key: 'todo-table-edit-action-title', value: 'Güncelle', dataType: DataType.string},
+    {key: 'todo-table-delete-action-title', value: 'Sil', dataType: DataType.string},
+    {key: 'todo-delete-all-item-confirm-title', value: 'Tüm görevleri silmek istiyor musunuz?', dataType: DataType.string},
+    {key: 'todo-delete-all-item-confirm-content', value: 'Onay vermeniz durumunda tüm kayıtlı görevler silinecektir.', dataType: DataType.string},
+    {key: 'notification-success-title', value: 'Görev Başarıyla Tamamlandı!', dataType: DataType.string},
+    {key: 'todo-delete-all-item-success', value: 'Kayıtlı tüm görevler başarıyla silinmiştir.', dataType: DataType.string},
+    {key: 'todo-delete-all-item', value: 'Tüm Veriyi Temizle', dataType: DataType.string},
+    {key: 'confirm-ok-button-text', value: 'Onayla', dataType: DataType.string},
+    {key: 'confirm-cancel-button-text', value: 'Vazgeç', dataType: DataType.string},
+
 ] as LanguageLocalizationModel[];
 
 const localizationsEn = [
@@ -68,7 +82,21 @@ const localizationsEn = [
     {key: 'todo-add-form-dublicate-error-', value: 'The task you want to add has already been added to the list. Please try a different job description.', dataType: DataType.string},
     {key: 'todo-add-form-submit-text', value: 'Create', dataType: DataType.string},
     {key: 'todo-add-form-job-priority-chose', value: 'Choose', dataType: DataType.string},
-    {key: 'todo-add-form-title', value: 'Create New Job', dataType: DataType.string}
+    {key: 'todo-add-form-title', value: 'Create New Job', dataType: DataType.string},
+    {key: 'todo-list-title', value: 'Job List', dataType: DataType.string},
+    {key: 'todo-filter-chose-priority', value: 'Select Priority', dataType: DataType.string},
+    {key: 'todo-filter-priority-all', value: 'Priority (All)', dataType: DataType.string},
+    {key: 'todo-table-actions', value: 'Actions', dataType: DataType.string},
+    {key: 'todo-table-edit-action-title', value: 'Edit', dataType: DataType.string},
+    {key: 'todo-table-delete-action-title', value: 'Delete', dataType: DataType.string},
+    {key: 'todo-delete-all-item-confirm-title', value: 'Do you want to delete all tasks?', dataType: DataType.string},
+    {key: 'todo-delete-all-item-confirm-content', value: 'All saved tasks will be deleted if you give consent.', dataType: DataType.string},
+    {key: 'notification-success-title', value: 'Mission Successfully Completed!', dataType: DataType.string},
+    {key: 'todo-delete-all-item-success', value: 'All saved tasks have been deleted successfully.', dataType: DataType.string},
+    {key: 'todo-delete-all-item', value: 'Clear All Data', dataType: DataType.string},
+    {key: 'confirm-ok-button-text', value: 'Approve', dataType: DataType.string},
+    {key: 'confirm-cancel-button-text', value: 'Cancel', dataType: DataType.string},
+
 ] as LanguageLocalizationModel[];
 
 export {localizationsTr, localizationsEn};

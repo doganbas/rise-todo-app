@@ -4,6 +4,7 @@ const persistConfiguration = {
     key: 'root',
     storage: storage,
     whitelist: ([
+        'ApplicationLanguageState',
         'TodoPriorityState',
         'TodoState'
     ]),
