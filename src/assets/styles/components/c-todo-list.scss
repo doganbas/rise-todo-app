@@ -28,6 +28,8 @@
     background-color: $gray-300;
 
     &-job-name {
+      word-break: break-all;
+
       em {
         display: inline-block;
         font-style: normal;
