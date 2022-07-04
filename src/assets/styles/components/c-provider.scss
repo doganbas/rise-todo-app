@@ -14,7 +14,7 @@
     flex: 1;
     width: 50%;
     padding: 30px;
-    background: $white url("/src/assets/images/backgrounds/general-error-bg.png") no-repeat center bottom;
+    background: $white url("../../images/backgrounds/general-error-bg.png") no-repeat center bottom;
     @include flex(flex-start, flex-start);
     background-size: contain;
 
@@ -167,7 +167,7 @@
 
   &__network & {
     &__image {
-      background-image: url("/src/assets/images/backgrounds/connection-error-bg.png");
+      background-image: url("../../images/backgrounds/connection-error-bg.png");
     }
   }
 
@@ -178,6 +178,7 @@
     left: 0;
     right: 0;
     min-height: 100vh;
+    z-index: 999999;
 
     &-content {
       justify-content: center;
@@ -216,7 +217,7 @@
 
   &__loader & {
     &__image {
-      background-image: url("/src/assets/images/backgrounds/loading-bg.png");
+      background-image: url("../../images/backgrounds/loading-bg.png");
     }
   }
 

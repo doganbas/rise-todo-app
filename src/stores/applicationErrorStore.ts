@@ -57,15 +57,15 @@ export const applicationErrorActionCreators = {
     },
     clearApplicationError: (cleanForce = false): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
-        if (!(appState && appState.ApplicationErrorState && appState.ApplicationErrorState.exceptionType == ExceptionType.fatal) || cleanForce)
+        if (!(appState && appState.ApplicationErrorState && appState.ApplicationErrorState.exceptionType === ExceptionType.fatal) || cleanForce)
             dispatch({type: 'CLEAR_APPLICATION_ERROR'});
     },
     setConnectionStatus: (activeStatus: boolean): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        if (getState() && getState().ApplicationErrorState && getState().ApplicationErrorState.internetConnection != activeStatus)
+        if (getState() && getState().ApplicationErrorState && getState().ApplicationErrorState.internetConnection !== activeStatus)
             dispatch({type: 'CHANGE_CONNECTION_STATUS', isOnline: activeStatus});
     },
     setIPAddress: (ipAddress: Nullable<string>): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        if (getState() && getState().ApplicationErrorState && getState().ApplicationErrorState.remoteIPAddress != ipAddress)
+        if (getState() && getState().ApplicationErrorState && getState().ApplicationErrorState.remoteIPAddress !== ipAddress)
             dispatch({type: 'CHANGE_EXTERNAL_IP_ADDRESS', ipAddress: ipAddress});
     }
 }

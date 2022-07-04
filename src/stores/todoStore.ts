@@ -26,7 +26,7 @@ export const todoActionCreators = {
     addTodo: (todoItem: TodoModel): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const globalDispatch = dispatch as CustomThunkDispatch;
         const activeState = getState() as ApplicationStates;
-        if ((activeState?.TodoState.todoList.filter(nq => nq.uuid == todoItem.uuid).length ?? 0) > 0) {
+        if ((activeState?.TodoState.todoList.filter(nq => nq.uuid === todoItem.uuid).length ?? 0) > 0) {
             globalDispatch(todoActionCreators.updateTodo(todoItem));
             return;
         }
@@ -36,7 +36,7 @@ export const todoActionCreators = {
         const globalDispatch = dispatch as CustomThunkDispatch;
         const activeState = getState() as ApplicationStates;
         const updateList = [...activeState.TodoState.todoList];
-        const removeItem = updateList.findIndex(nq => nq.uuid == todoItem.uuid);
+        const removeItem = updateList.findIndex(nq => nq.uuid === todoItem.uuid);
         if (removeItem < 0) {
             globalDispatch(todoActionCreators.addTodo(todoItem));
             return;
@@ -48,7 +48,7 @@ export const todoActionCreators = {
     removeTodo: (todoItem: TodoModel): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const activeState = getState() as ApplicationStates;
         const updateList = [...activeState.TodoState.todoList];
-        const removeItem = updateList.findIndex(nq => nq.uuid == todoItem.uuid);
+        const removeItem = updateList.findIndex(nq => nq.uuid === todoItem.uuid);
         updateList.splice(removeItem, 1);
         dispatch({type: 'UPDATE_TODO_LIST_ACTION', todoList: updateList});
     },

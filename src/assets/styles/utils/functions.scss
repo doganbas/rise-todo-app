@@ -1,10 +1,12 @@
+@use "sass:math";
+
 @function calc-font($fontSize) {
-  $convertedValue: $fontSize / 14px;
+  $convertedValue: math.div($fontSize, 14px);
   @return #{$convertedValue}em;
 }
 
 @function calc-font-orj($fontSize, $originalSize) {
-  $convertedValue: $fontSize / $originalSize;
+  $convertedValue: math.div($fontSize, $originalSize);
   @return #{$convertedValue}em;
 }
 

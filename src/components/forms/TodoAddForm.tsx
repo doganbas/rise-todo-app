@@ -28,7 +28,7 @@ const TodoAddForm: FunctionComponent = () => {
         action.setSubmitting(true);
         values.uuid = generateUUID();
 
-        if (todoState.todoList.find(nq => nq.jobTitle == values.jobTitle)) {
+        if (todoState.todoList.find(nq => nq.jobTitle === values.jobTitle)) {
             notification['error']({
                 message: t('todo-add-form-dublicate-error-title', 'Hata!'),
                 description: t('todo-add-form-dublicate-error-message', 'Eklemek istediğiniz görev daha önce listeye eklenmiştir. Lütfen farklı bir görev tanımı deneyiniz.'),

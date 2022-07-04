@@ -23,10 +23,6 @@ type ApplicationErrorProviderPropsType = {
 
 class ApplicationErrorProvider extends PureComponent<ApplicationErrorProviderPropsType> {
 
-    constructor(props: ApplicationErrorProviderPropsType) {
-        super(props);
-    }
-
     async componentDidMount() {
         window.addEventListener('online', this.handleConnectionStatus);
         window.addEventListener('offline', this.handleConnectionStatus);
@@ -67,11 +63,10 @@ class ApplicationErrorProvider extends PureComponent<ApplicationErrorProviderPro
     };
 
     render() {
-        //return this.renderWarningInfo();
         return (
             <>
                 {
-                    (this.props.applicationErrorState.exceptionType != ExceptionType.fatal && this.props.applicationErrorState.exceptionType != ExceptionType.error) && this.props.applicationErrorState.internetConnection && this.props.applicationErrorState.remoteIPAddress &&
+                    (this.props.applicationErrorState.exceptionType !== ExceptionType.fatal && this.props.applicationErrorState.exceptionType !== ExceptionType.error) && this.props.applicationErrorState.internetConnection && this.props.applicationErrorState.remoteIPAddress &&
                     this.props.children
                 }
                 {

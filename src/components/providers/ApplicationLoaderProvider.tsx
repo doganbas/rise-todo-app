@@ -18,7 +18,7 @@ const ApplicationLoaderProvider: FunctionComponent<PropsWithChildren> = (props) 
     const loaderState = useSelector<ApplicationStates, ApplicationLoaderState>(state => state.ApplicationLoaderState);
 
     useEffect(() => {
-        const overLoader = loaderState?.loaderItems.filter(nq => nq.loaderType == LoaderType.inclusive) ?? [];
+        const overLoader = loaderState?.loaderItems.filter(nq => nq.loaderType === LoaderType.inclusive) ?? [];
         if (overLoader.length > 0)
             document.body.classList.add('c-loader__body');
         else
@@ -41,14 +41,16 @@ const ApplicationLoaderProvider: FunctionComponent<PropsWithChildren> = (props) 
 
     const checkProviderTime = (inLoaderState: ApplicationLoaderState) => {
         if (inLoaderState && inLoaderState.loaderItems.length) {
-            const removeList = inLoaderState.loaderItems.map((item) => {
+            const removeList = inLoaderState.loaderItems.filter((item) => {
                 const elapsedNow = DateHelper.timeDiff(item.startTime, null, 'second');
                 const maxElapse = applicationConfig.settings.loadTimeOut;
 
                 if (maxElapse <= elapsedNow)
                     return item.loaderId;
+
+                return undefined;
             });
-            removeList.map(item => item && dispatch(applicationLoaderActionCreators.hideGlobalLoader(item)));
+            removeList.map(item => item && dispatch(applicationLoaderActionCreators.hideGlobalLoader(item.loaderId)));
         }
     };
 
@@ -128,11 +130,11 @@ const ApplicationLoaderProvider: FunctionComponent<PropsWithChildren> = (props) 
                 props.children
             }
             {
-                loaderState.isVisible && loaderState.loaderItems.filter(nq => nq.loaderType == LoaderType.inclusive).length > 0 &&
+                loaderState.isVisible && loaderState.loaderItems.filter(nq => nq.loaderType === LoaderType.inclusive).length > 0 &&
                 renderFullLoader()
             }
             {
-                loaderState.isVisible && loaderState.loaderItems.filter(nq => nq.loaderType == LoaderType.overlay).length > 0 &&
+                loaderState.isVisible && loaderState.loaderItems.filter(nq => nq.loaderType === LoaderType.overlay).length > 0 &&
                 renderOverboxLoader()
             }
         </>
