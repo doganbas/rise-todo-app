@@ -16,17 +16,17 @@ const ApplicationLanguageProvider: FunctionComponent<PropsWithChildren> = (props
 
     useEffect(() => {
         dispatch(applicationLanguageActionCreators.initLocalizationSystem());
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         let deviceLanguage = navigator.language;
         if (deviceLanguage.indexOf('-') > -1)
             deviceLanguage = deviceLanguage.split('-')[0].toLowerCase();
-        if (deviceLanguage != languageState.deviceLanguage)
+        if (deviceLanguage !== languageState.deviceLanguage)
             dispatch(applicationLanguageActionCreators.setDeviceLanguage(deviceLanguage));
 
         if (languageState.completeLocalization && !languageState.activeLanguage) {
-            let selectedLanguage: Nullable<LanguageModel> = languageState.languageList.filter(nq => nq.globalName == deviceLanguage)[0];
+            let selectedLanguage: Nullable<LanguageModel> = languageState.languageList.filter(nq => nq.globalName === deviceLanguage)[0];
             if (!selectedLanguage)
                 selectedLanguage = languageState.languageList[0];
             dispatch(applicationLanguageActionCreators.changeApplicationLanguage(selectedLanguage));
@@ -35,18 +35,18 @@ const ApplicationLanguageProvider: FunctionComponent<PropsWithChildren> = (props
         }
 
         if (languageState.activeLanguage) {
-            const importFile = languageState.activeLanguage.globalName == 'en' ? 'en-gb' : 'tr';
+            const importFile = languageState.activeLanguage.globalName === 'en' ? 'en-gb' : 'tr';
             import(`moment/locale/${importFile}`).then(() => {
                 moment.locale(importFile);
             });
         }
 
-    }, [languageState]);
+    }, [dispatch, languageState]);
 
     return (
         <>
             {
-                languageState.completeLocalization && languageState.activeLanguage && i18next.isInitialized ? <ConfigProvider locale={languageState.activeLanguage.globalName == 'en' ? AntEn : AntTr}>{props.children}</ConfigProvider> : <div/>
+                languageState.completeLocalization && languageState.activeLanguage && i18next.isInitialized ? <ConfigProvider locale={languageState.activeLanguage.globalName === 'en' ? AntEn : AntTr}>{props.children}</ConfigProvider> : <div/>
             }
         </>
     );

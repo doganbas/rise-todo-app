@@ -26,7 +26,7 @@ const TodoList: FunctionComponent = () => {
 
     useEffect(() => {
         dispatch(todoPriorityActionCreators.checkTodoPriorityData());
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         let newData = todoState.todoList;
@@ -35,7 +35,7 @@ const TodoList: FunctionComponent = () => {
         if (filterName)
             newData = newData?.filter(nq => (nq.jobTitle?.toLowerCase().indexOf(filterName.toLowerCase()) ?? -1) > -1) ?? [];
         if (filterPriority)
-            newData = newData?.filter(nq => nq.jobPriority == filterPriority) ?? [];
+            newData = newData?.filter(nq => nq.jobPriority === filterPriority) ?? [];
 
         setTodoList(newData);
     }, [todoState.todoList, filterName, filterPriority]);
@@ -72,14 +72,14 @@ const TodoList: FunctionComponent = () => {
     }
 
     const renderJobName = (jobName: string, todoItem: TodoModel): React.ReactNode => {
-        const activePriority = todoPriorityState.priorityList.find(nq => nq.uuid == todoItem.jobPriority);
+        const activePriority = todoPriorityState.priorityList.find(nq => nq.uuid === todoItem.jobPriority);
         return (
             <span className="c-todo-list__filter-job-name" style={{color: activePriority?.color ?? '#000'}}>{jobName} <em>{activePriority && PriorityDataHelper.translatePriorityName(activePriority, languageState.activeLanguage?.globalName)}</em></span>
         )
     }
 
     const renderPriorityName = (priorityUUID: string): React.ReactNode => {
-        const activePriority = todoPriorityState.priorityList.find(nq => nq.uuid == priorityUUID);
+        const activePriority = todoPriorityState.priorityList.find(nq => nq.uuid === priorityUUID);
         if (activePriority) {
             return (<Tag color={activePriority.color}>{PriorityDataHelper.translatePriorityName(activePriority, languageState.activeLanguage?.globalName)}</Tag>)
         }
@@ -87,8 +87,8 @@ const TodoList: FunctionComponent = () => {
     }
 
     const sortDataByPriotiry = (a: TodoModel, b: TodoModel) => {
-        const aPriority = todoPriorityState.priorityList.find(nq => nq.uuid == a.jobPriority)?.order ?? 0;
-        const bPriority = todoPriorityState.priorityList.find(nq => nq.uuid == b.jobPriority)?.order ?? 0;
+        const aPriority = todoPriorityState.priorityList.find(nq => nq.uuid === a.jobPriority)?.order ?? 0;
+        const bPriority = todoPriorityState.priorityList.find(nq => nq.uuid === b.jobPriority)?.order ?? 0;
         return aPriority - bPriority;
     }
 
@@ -184,3 +184,4 @@ const TodoList: FunctionComponent = () => {
 }
 
 export default TodoList;
+

@@ -42,6 +42,7 @@ const AppFooter: FunctionComponent = () => {
                         &copy;&nbsp;{new Date().getFullYear()}&nbsp;{applicationConfig.brandInfo.companyName}
                         {
                             todoState.todoList.length > 0 &&
+                            // eslint-disable-next-line jsx-a11y/anchor-is-valid
                             <>| <a onClick={handleClickClearTodoList}>{t('todo-delete-all-item', 'Tüm Veriyi Temizle')}</a></>
                         }
                     </p>

@@ -39,7 +39,7 @@ export const todoPriorityActionCreators = {
         const globalDispatch = dispatch as CustomThunkDispatch;
         const activeState = getState() as ApplicationStates;
 
-        if (!activeState.TodoPriorityState.isFetching && (activeState.TodoPriorityState.lastSync == null || activeState.TodoPriorityState.priorityList.length == 0 || DateHelper.timeDiff(activeState.TodoPriorityState.lastSync, null, 'hour') > 12))
+        if (!activeState.TodoPriorityState.isFetching && (activeState.TodoPriorityState.lastSync == null || activeState.TodoPriorityState.priorityList.length === 0 || DateHelper.timeDiff(activeState.TodoPriorityState.lastSync, null, 'hour') > 12))
             globalDispatch(todoPriorityActionCreators.getTodoPriorityData());
     },
     getTodoPriorityData: (): AppThunkAction<KnownAction> => (dispatch) => {
@@ -51,6 +51,7 @@ export const todoPriorityActionCreators = {
             dispatch({type: 'RECEIVE_TODO_PRIORITY_ACTION', priorityList: responseData});
         }).catch((exception: AxiosError) => {
             globalDispatch(applicationErrorActionCreators.generateApplicationError(exception.message, ExceptionType.error, exception.code, true));
+            dispatch({type: 'RECEIVE_TODO_PRIORITY_ACTION', priorityList: []});
         }).finally(() => {
             globalDispatch(applicationLoaderActionCreators.hideGlobalLoader(loaderId));
         })

@@ -50,15 +50,15 @@ export const applicationLanguageActionCreators = {
         const globalDispatch = dispatch as CustomThunkDispatch;
         const activeState = getState() as ApplicationStates;
         if (typeof activeLanguage == 'string') {
-            let inLanguage = activeState.ApplicationLanguageState.languageList.filter(nq => nq.globalName == activeLanguage)[0];
+            let inLanguage = activeState.ApplicationLanguageState.languageList.filter(nq => nq.globalName === activeLanguage)[0];
             if (inLanguage == null)
                 inLanguage = activeState.ApplicationLanguageState.languageList[0];
             activeLanguage = inLanguage;
         }
 
         const globalName = activeLanguage.globalName;
-        if (activeState.ApplicationLanguageState.languageList.filter(nq => nq.globalName == globalName).length > 0) {
-            if (!activeState?.ApplicationLanguageState?.activeLanguage || activeState.ApplicationLanguageState.activeLanguage.globalName != activeLanguage.globalName) {
+        if (activeState.ApplicationLanguageState.languageList.filter(nq => nq.globalName === globalName).length > 0) {
+            if (!activeState?.ApplicationLanguageState?.activeLanguage || activeState.ApplicationLanguageState.activeLanguage.globalName !== activeLanguage.globalName) {
                 dispatch({type: 'CHANGE_APPLICATION_LANGUAGE', activeLanguage: activeLanguage});
                 i18n.changeLanguage(activeLanguage.globalName).catch((ex) => {
                     DevConsole.error(ex);
@@ -69,7 +69,7 @@ export const applicationLanguageActionCreators = {
         }
     },
     setDeviceLanguage: (deviceLanguage: Nullable<string>): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        if (getState()?.ApplicationLanguageState?.activeLanguage != deviceLanguage) {
+        if (getState()?.ApplicationLanguageState?.activeLanguage !== deviceLanguage) {
             dispatch({type: 'SET_DEVICE_LANGUAGE', deviceLanguage: deviceLanguage});
         }
     },
@@ -133,7 +133,7 @@ export const applicationLanguageActionCreators = {
         const activeState = getState() as ApplicationStates;
         const activeLanguageList = activeState.ApplicationLanguageState.languageList;
         activeLanguageList.forEach(activeLanguage => {
-            if (activeLanguage.localization.filter(nq => nq.key == transKey).length <= 0) {
+            if (activeLanguage.localization.filter(nq => nq.key === transKey).length <= 0) {
                 activeLanguage.localization.push({
                     value: defaultTrans ?? transKey,
                     key: transKey,

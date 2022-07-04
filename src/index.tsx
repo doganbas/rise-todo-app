@@ -1,27 +1,18 @@
-import {Provider} from 'react-redux';
-import React, {useEffect} from 'react';
-import {PersistGate} from 'redux-persist/integration/react';
-import ApplicationProvider from './components/providers/ApplicationProvider';
-import {setFetchApiDefault} from './config/fetchApiConfig';
-import {persistStorage, store} from './config/storeConfig';
-import Layout from './views/shared/Layout';
-import '/src/assets/styles/base.scss';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./views/App";
+import reportWebVitals from "./reportWebVitals";
+import "antd/dist/antd.min.css";
+import "./assets/styles/base.scss";
 
-const App = () => {
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
 
-    useEffect(() => {
-        setFetchApiDefault();
-    }, []);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
-    return (
-        <Provider store={store}>
-            <PersistGate persistor={persistStorage}>
-                <ApplicationProvider>
-                    <Layout/>
-                </ApplicationProvider>
-            </PersistGate>
-        </Provider>
-    )
-}
-
-export default App;
+reportWebVitals();

@@ -51,7 +51,7 @@ const HeaderFunctions: FunctionComponent = () => {
         workSheet.getColumn(3).width = 30;
 
         todoState.todoList.forEach((item, index) => {
-            const itemPriority = todoPriorityList.find(nq => nq.uuid == item.jobPriority) ?? todoPriorityList.sort((a, b) => a.order - b.order)[0];
+            const itemPriority = todoPriorityList.find(nq => nq.uuid === item.jobPriority) ?? todoPriorityList.sort((a, b) => a.order - b.order)[0];
             workSheet.getCell(index + 2, 1).value = item.jobTitle;
             workSheet.getCell(index + 2, 2).value = PriorityDataHelper.translatePriorityName(itemPriority, languageState.activeLanguage?.globalName);
             workSheet.getCell(index + 2, 2).style.fill = {
@@ -87,7 +87,7 @@ const HeaderFunctions: FunctionComponent = () => {
 
     const renderMenuItems = (item: LanguageModel) => {
         return (
-            <Menu.Item key={`language-${item.globalName}`} className={languageState.activeLanguage?.globalName == item.globalName ? 'ant-menu-item-selected' : ''} onClick={() => handleClickChangeLanguage(item)}>
+            <Menu.Item key={`language-${item.globalName}`} className={languageState.activeLanguage?.globalName === item.globalName ? 'ant-menu-item-selected' : ''} onClick={() => handleClickChangeLanguage(item)}>
                 {item.name}
             </Menu.Item>
         )

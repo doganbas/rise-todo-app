@@ -16,11 +16,11 @@ const PrioritySelect: FunctionComponent<{ name: string, placeholder?: string, on
 
     useEffect(() => {
         dispatch(todoPriorityActionCreators.checkTodoPriorityData());
-    }, []);
+    }, [dispatch]);
 
     const handleChangePriority = (value: string): void => {
-        const selectedItem = todoPriorityState.priorityList.find(nq => nq.uuid == value);
-        if (props.onChange && value != '-1')
+        const selectedItem = todoPriorityState.priorityList.find(nq => nq.uuid === value);
+        if (props.onChange && value !== '-1')
             props.onChange(selectedItem);
         else if (props.onChange)
             props.onChange(undefined);
@@ -32,11 +32,11 @@ const PrioritySelect: FunctionComponent<{ name: string, placeholder?: string, on
         <RenderSelect name={props.name} onChange={handleChangePriority} defaultValue={props.defaultValue} loading={todoPriorityState.isFetching} size="large" style={{width: '100%'}} placeholder={props.placeholder}>
             {
                 props.addAllOption &&
-                <option key="all" value="-1">{props.allOptionTitle}</option>
+                <RenderSelect.Option key="all" value="-1">{props.allOptionTitle}</RenderSelect.Option>
             }
             {
                 !todoPriorityState.isFetching &&
-                todoPriorityState.priorityList.map(item => <Select.Option key={item.uuid} value={item.uuid}>{PriorityDataHelper.translatePriorityName(item, languageState.activeLanguage?.globalName)}</Select.Option>)
+                todoPriorityState.priorityList.map(item => <RenderSelect.Option key={item.uuid} value={item.uuid}>{PriorityDataHelper.translatePriorityName(item, languageState.activeLanguage?.globalName)}</RenderSelect.Option>)
             }
         </RenderSelect>
     )
