@@ -2,6 +2,13 @@
 
 Kişisel iş takip uygulaması
 
+## Canlı Deneme
+
+Api İçin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: https://todoapi.doganbas.com/
+
+Uygulama İçin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: https://todo.doganbas.com/
+
+
 ## Başlarken
 
 Repo'yu yerel bilgisayarınıza indirerek, aşağıdaki adımları uygulayabilirsiniz.
