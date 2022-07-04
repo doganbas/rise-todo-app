@@ -12,6 +12,7 @@ import {LanguageModel} from '../../models/languageModel';
 import DateHelper from '../../helpers/dateHelper';
 import {TodoState} from '../../stores/todoStore';
 import {CustomThunkDispatch} from '../../types';
+import {DevConsole} from '../../helpers/consoleHelper';
 
 const HeaderFunctions: FunctionComponent = () => {
     const dispatch = useDispatch<CustomThunkDispatch>();
@@ -37,13 +38,13 @@ const HeaderFunctions: FunctionComponent = () => {
             },
             bold: true
         }
-        workSheet.getCell(1, 1).value = 'Görev Adı';
+        workSheet.getCell(1, 1).value = t('todo-add-form-job-title-label', 'Görev Adı');
         workSheet.getCell(1, 1).style.fill = titleBgStyle;
         workSheet.getCell(1, 1).font = titleFont;
-        workSheet.getCell(1, 2).value = 'Öncelik';
+        workSheet.getCell(1, 2).value = t('todo-add-form-job-pritiory-label', 'Görev Önceliği');
         workSheet.getCell(1, 2).style.fill = titleBgStyle;
         workSheet.getCell(1, 2).font = titleFont;
-        workSheet.getCell(1, 3).value = 'Ekleme Tarihi';
+        workSheet.getCell(1, 3).value = t('todo-add-date', 'Ekleme Tarihi');
         workSheet.getCell(1, 3).style.fill = titleBgStyle;
         workSheet.getCell(1, 3).font = titleFont;
         workSheet.getColumn(1).width = 90;
@@ -77,7 +78,7 @@ const HeaderFunctions: FunctionComponent = () => {
                 window.URL.revokeObjectURL(url);
             }, 0);
         }).catch(function (error) {
-            console.log(error.message);
+            DevConsole.error(error);
         });
     };
 
@@ -87,7 +88,7 @@ const HeaderFunctions: FunctionComponent = () => {
 
     const renderMenuItems = (item: LanguageModel) => {
         return (
-            <Menu.Item key={`language-${item.globalName}`} className={languageState.activeLanguage?.globalName === item.globalName ? 'ant-menu-item-selected' : ''} onClick={() => handleClickChangeLanguage(item)}>
+            <Menu.Item key={`language-${item.globalName}`} className={languageState.activeLanguage?.globalName === item.globalName ? 'ant-menu-item-selected' : ''} onClick={() => handleClickChangeLanguage(item)} data-testid={`app-language-list-item-${item.globalName}`}>
                 {item.name}
             </Menu.Item>
         )
@@ -96,7 +97,7 @@ const HeaderFunctions: FunctionComponent = () => {
     const renderDataMenu = () => {
         return (
             <Menu key="import-export-data" title={t('data-transfer', 'Veri Aktarımı')}>
-                <Menu.Item key="export-data" icon={<ExportOutlined/>} onClick={handleClickExportData}>
+                <Menu.Item key="export-data" icon={<ExportOutlined/>} onClick={handleClickExportData} data-testid="todo-transfer-list-export">
                     {t('export-data', 'Dışarı Aktar')}
                 </Menu.Item>
             </Menu>
@@ -117,7 +118,7 @@ const HeaderFunctions: FunctionComponent = () => {
     return (
         <>
             <Dropdown overlay={renderDataMenu}>
-                <Button className="c-layout__header-functions-item" size="middle">
+                <Button className="c-layout__header-functions-item" size="middle" data-testid="todo-transfer-list">
                     <Space>
                         <SettingOutlined/>
                         {t('data-transfer', 'Veri Aktarımı')}
@@ -125,7 +126,7 @@ const HeaderFunctions: FunctionComponent = () => {
                 </Button>
             </Dropdown>
             <Dropdown overlay={renderLanguageMenu}>
-                <Button className="c-layout__header-functions-item" size="middle">
+                <Button className="c-layout__header-functions-item" size="middle" data-testid="app-language-list">
                     <Space>
                         <GlobalOutlined/>
                         {t('select-app-language', 'Dil Seçimi')}

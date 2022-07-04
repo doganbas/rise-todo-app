@@ -63,7 +63,7 @@ const TodoAddForm: FunctionComponent = () => {
                 <Row gutter={[20, 20]}>
                     <Col xs={24} md={8} lg={14} xxl={16}>
                         <Form.Item name="jobTitle" label={fieldTitles.jobTitle} validateStatus={formik.errors.jobTitle && 'error'} help={formik.errors.jobTitle}>
-                            <Input name="jobTitle" size="large" placeholder={fieldTitles.jobTitle}/>
+                            <Input name="jobTitle" size="large" placeholder={fieldTitles.jobTitle} data-testid="todo-add-form-job-title"/>
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={8} lg={6} xxl={6}>
@@ -73,7 +73,7 @@ const TodoAddForm: FunctionComponent = () => {
                     </Col>
                     <Col xs={24} md={8} lg={4} xxl={2}>
                         <Form.Item name="button" label=" " className="c-todo-add__form-button">
-                            <SubmitButton type="primary" icon={<PlusOutlined/>} size="large" block={true}>{t('todo-add-form-submit-text', 'Oluştur')}</SubmitButton>
+                            <SubmitButton type="primary" icon={<PlusOutlined/>} size="large" block={true} data-testid="todo-add-form-submit">{t('todo-add-form-submit-text', 'Oluştur')}</SubmitButton>
                         </Form.Item>
                     </Col>
                 </Row>
@@ -82,7 +82,7 @@ const TodoAddForm: FunctionComponent = () => {
     }
 
     return (
-        <div className="c-todo-add">
+        <div className="c-todo-add" data-testid="todo-add-form">
             <div className="c-container-padding">
                 <h1 className="c-todo-add__title">{t('todo-add-form-title', 'Yeni Görev Oluştur')}</h1>
                 <Formik

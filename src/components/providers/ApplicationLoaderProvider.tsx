@@ -56,7 +56,7 @@ const ApplicationLoaderProvider: FunctionComponent<PropsWithChildren> = (props) 
 
     const renderFullLoader = () => {
         return (
-            <div className="c-provider c-provider__loader">
+            <div className="c-provider c-provider__loader" data-testid="app-loader">
                 <div className="c-provider-container">-
                     <div className="c-provider__image">
                         <a href={applicationConfig.brandInfo.brandLink} title={applicationConfig.brandInfo.brandName} className="c-provider__image-logo" target="_blank" rel="external noreferrer">
@@ -92,7 +92,7 @@ const ApplicationLoaderProvider: FunctionComponent<PropsWithChildren> = (props) 
 
     const renderOverboxLoader = () => {
         return (
-            <div className="c-provider c-provider__loading">
+            <div className="c-provider c-provider__loading" data-testid="app-loader">
                 <div className="c-provider__content c-provider__loading-container">
                     <div className="c-provider__content-effect">
                         <Player src={waitingAnimation} autoplay={true} loop={true} style={{width: 'auto', height: '250px'}}/>

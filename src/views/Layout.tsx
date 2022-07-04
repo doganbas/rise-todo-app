@@ -8,10 +8,10 @@ import TodoList from '../components/lists/TodoList';
 const Layout: FunctionComponent = () => {
 
     return (
-        <div className="c-layout">
+        <div className="c-layout" data-testid="app-layout">
             <AppHelmet/>
             <AppHeader/>
-            <main className="c-layout__content">
+            <main className="c-layout__content" data-testid="app-layout-main">
                 <NewTodoForm/>
                 <TodoList/>
             </main>
