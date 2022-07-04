@@ -1,7 +1,6 @@
 import i18next from 'i18next';
 import {Button} from 'antd';
 import {connect} from 'react-redux';
-import {publicIpv4} from 'public-ip';
 import React, {PureComponent} from 'react';
 import {Player} from '@lottiefiles/react-lottie-player';
 import * as ApplicationLanguageStore from '../../stores/applicationLanguageStore';
@@ -28,8 +27,6 @@ class ApplicationErrorProvider extends PureComponent<ApplicationErrorProviderPro
         window.addEventListener('offline', this.handleConnectionStatus);
         if (!isDev())
             window.addEventListener('error', this.handleErrorCatchError);
-        const activeIp = await publicIpv4();
-        this.props.setIPAddress(activeIp);
         this.handleConnectionStatus();
     }
 
@@ -66,7 +63,7 @@ class ApplicationErrorProvider extends PureComponent<ApplicationErrorProviderPro
         return (
             <>
                 {
-                    (this.props.applicationErrorState.exceptionType !== ExceptionType.fatal && this.props.applicationErrorState.exceptionType !== ExceptionType.error) && this.props.applicationErrorState.internetConnection && this.props.applicationErrorState.remoteIPAddress &&
+                    (this.props.applicationErrorState.exceptionType !== ExceptionType.fatal && this.props.applicationErrorState.exceptionType !== ExceptionType.error) && this.props.applicationErrorState.internetConnection &&
                     this.props.children
                 }
                 {
@@ -86,7 +83,7 @@ class ApplicationErrorProvider extends PureComponent<ApplicationErrorProviderPro
 
     renderStandardError = () => {
         return (
-            <div className="c-provider c-provider--error">
+            <div className="c-provider c-provider--error" data-testid="app-error">
                 <div className="c-provider-container">
                     <div className="c-provider__image">
                         <a href={applicationConfig.brandInfo.brandLink} title={applicationConfig.brandInfo.brandName} className="c-provider__image-logo" target="_blank" rel="external noreferrer">
@@ -128,7 +125,7 @@ class ApplicationErrorProvider extends PureComponent<ApplicationErrorProviderPro
 
     renderWarningInfo = () => {
         return (
-            <div className="c-provider c-provider__warning">
+            <div className="c-provider c-provider__warning" data-testid="app-warning">
                 <div className="c-provider__content c-provider__warning-content">
                     <div className="c-provider__content-effect">
                         <Player src={warningAnimationData} autoplay={true} loop={true} style={{width: 'auto', height: '250px'}}/>
@@ -163,7 +160,7 @@ class ApplicationErrorProvider extends PureComponent<ApplicationErrorProviderPro
 
     renderNetworkError = () => {
         return (
-            <div className={`c-provider c-provider__network ${!this.props.applicationErrorState.internetConnection ? 'c-provider__network--show' : ''}`}>
+            <div className={`c-provider c-provider__network ${!this.props.applicationErrorState.internetConnection ? 'c-provider__network--show' : ''}`} data-testid="app-error-connection">
                 <div className="c-provider-container">
                     <div className="c-provider__image">
                         <a href={applicationConfig.brandInfo.brandLink} title={applicationConfig.brandInfo.brandName} className="c-provider__image-logo" target="_blank" rel="external noreferrer">

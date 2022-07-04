@@ -8,8 +8,7 @@ export interface ApplicationErrorState {
     exceptionType: ExceptionType,
     errorCode: Nullable<string>,
     errorMessage: Nullable<string>,
-    internetConnection: boolean,
-    remoteIPAddress: Nullable<string>
+    internetConnection: boolean
 }
 
 interface SetApplicationErrorAction {
@@ -29,20 +28,14 @@ interface ChangeConnectionAction {
     isOnline: boolean
 }
 
-interface ChangeExternalIPAddress {
-    type: 'CHANGE_EXTERNAL_IP_ADDRESS',
-    ipAddress: Nullable<string>
-}
-
-export type KnownAction = SetApplicationErrorAction | ClearApplicationErrorAction | ChangeConnectionAction | ChangeExternalIPAddress;
+export type KnownAction = SetApplicationErrorAction | ClearApplicationErrorAction | ChangeConnectionAction;
 
 const unloadedState: ApplicationErrorState = {
     isVisible: false,
     exceptionType: ExceptionType.undefined,
     errorCode: null,
     errorMessage: null,
-    internetConnection: true,
-    remoteIPAddress: null
+    internetConnection: true
 };
 
 export const applicationErrorActionCreators = {
@@ -63,10 +56,6 @@ export const applicationErrorActionCreators = {
     setConnectionStatus: (activeStatus: boolean): AppThunkAction<KnownAction> => (dispatch, getState) => {
         if (getState() && getState().ApplicationErrorState && getState().ApplicationErrorState.internetConnection !== activeStatus)
             dispatch({type: 'CHANGE_CONNECTION_STATUS', isOnline: activeStatus});
-    },
-    setIPAddress: (ipAddress: Nullable<string>): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        if (getState() && getState().ApplicationErrorState && getState().ApplicationErrorState.remoteIPAddress !== ipAddress)
-            dispatch({type: 'CHANGE_EXTERNAL_IP_ADDRESS', ipAddress: ipAddress});
     }
 }
 
@@ -95,14 +84,8 @@ export const applicationErrorReducer: Reducer<ApplicationErrorState> = (state: A
         case 'CLEAR_APPLICATION_ERROR':
             return {
                 ...unloadedState,
-                internetConnection: state.internetConnection,
-                remoteIPAddress: state.remoteIPAddress
+                internetConnection: state.internetConnection
             };
-        case 'CHANGE_EXTERNAL_IP_ADDRESS':
-            return {
-                ...state,
-                remoteIPAddress: action.ipAddress
-            }
     }
 
     return state;

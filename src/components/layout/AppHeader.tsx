@@ -4,7 +4,7 @@ import HeaderFunctions from './HeaderFunctions';
 import {appLogo} from '../../assets/images';
 
 const AppHeader: FunctionComponent = () => (
-    <header className="c-layout__header">
+    <header className="c-layout__header" data-testid="app-layout-header">
         <div className="c-container-padding">
             <div className="c-layout__header-content">
                 <a href={applicationConfig.brandInfo.brandLink} className="c-layout__header-logo" title={applicationConfig.brandInfo.brandName} target="_blank" rel="external noreferrer">

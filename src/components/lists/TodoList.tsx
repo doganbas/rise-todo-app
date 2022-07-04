@@ -30,7 +30,6 @@ const TodoList: FunctionComponent = () => {
 
     useEffect(() => {
         let newData = todoState.todoList;
-        console.log(filterName, filterPriority, newData);
 
         if (filterName)
             newData = newData?.filter(nq => (nq.jobTitle?.toLowerCase().indexOf(filterName.toLowerCase()) ?? -1) > -1) ?? [];
@@ -41,7 +40,6 @@ const TodoList: FunctionComponent = () => {
     }, [todoState.todoList, filterName, filterPriority]);
 
     const handleClickEditButton = (todoItem: TodoModel) => {
-        console.log(todoItem);
         setEditModal({todoItem: todoItem, isVisible: true});
     }
 
@@ -73,8 +71,9 @@ const TodoList: FunctionComponent = () => {
 
     const renderJobName = (jobName: string, todoItem: TodoModel): React.ReactNode => {
         const activePriority = todoPriorityState.priorityList.find(nq => nq.uuid === todoItem.jobPriority);
+        const activePriorityName = !activePriority ? '' : PriorityDataHelper.translatePriorityName(activePriority, languageState.activeLanguage?.globalName);
         return (
-            <span className="c-todo-list__filter-job-name" style={{color: activePriority?.color ?? '#000'}}>{jobName} <em>{activePriority && PriorityDataHelper.translatePriorityName(activePriority, languageState.activeLanguage?.globalName)}</em></span>
+            <span className="c-todo-list__filter-job-name" style={{color: activePriority?.color ?? '#000'}} data-testid={`todo-list-item-${jobName}`}>{jobName} <em data-testid={`todo-list-item-${activePriorityName}`}>{activePriorityName}</em></span>
         )
     }
 
@@ -101,7 +100,7 @@ const TodoList: FunctionComponent = () => {
 
     return (
         <div className="c-container-padding">
-            <div className="c-todo-list">
+            <div className="c-todo-list" data-testid="todo-list">
                 <div className="c-todo-list__title">
                     <h2 className="c-todo-list__title-text">{t('todo-list-title', 'Görev Listesi')}</h2>
                     <span className="c-todo-list__title-count">{todoState.todoList.length + '/' + (todoList?.length ?? 0)}</span>
@@ -158,10 +157,10 @@ const TodoList: FunctionComponent = () => {
                             render={(_: object, record: TodoModel) => (
                                 <Space size="middle">
                                     <Tooltip placement="top" title={t('todo-table-edit-action-title', 'Güncelle')}>
-                                        <Button type="primary" icon={<EditOutlined/>} size="middle" onClick={() => handleClickEditButton(record)}/>
+                                        <Button type="primary" icon={<EditOutlined/>} size="middle" onClick={() => handleClickEditButton(record)} data-testid={`todo-list-item-edit-${record.jobTitle}`}/>
                                     </Tooltip>
                                     <Tooltip placement="top" title={t('todo-table-delete-action-title', 'Sil')}>
-                                        <Button type="primary" icon={<DeleteOutlined/>} size="middle" onClick={() => handleClickDeleteButton(record)} danger/>
+                                        <Button type="primary" icon={<DeleteOutlined/>} size="middle" onClick={() => handleClickDeleteButton(record)} data-testid={`todo-list-item-remove-${record.jobTitle}`} danger/>
                                     </Tooltip>
                                 </Space>
                             )}

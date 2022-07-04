@@ -31,7 +31,7 @@ const AppFooter: FunctionComponent = () => {
     }
 
     return (
-        <footer className="c-layout__footer">
+        <footer className="c-layout__footer" data-testid="app-layout-footer">
             <div className="c-container-padding">
                 <div className="c-layout__footer-content">
                     <a href={applicationConfig.brandInfo.brandLink} className="c-layout__footer-link" title={t('footer-repository-link-title', 'repository')} target="_blank" rel="external noreferrer">
@@ -43,7 +43,7 @@ const AppFooter: FunctionComponent = () => {
                         {
                             todoState.todoList.length > 0 &&
                             // eslint-disable-next-line jsx-a11y/anchor-is-valid
-                            <>| <a onClick={handleClickClearTodoList}>{t('todo-delete-all-item', 'Tüm Veriyi Temizle')}</a></>
+                            <>| <a onClick={handleClickClearTodoList} data-testid="todo-clear-all">{t('todo-delete-all-item', 'Tüm Veriyi Temizle')}</a></>
                         }
                     </p>
                 </div>

@@ -20,7 +20,7 @@ const TodoEditForm: FunctionComponent<{ todoItem: TodoModel | undefined, onCompl
     }
 
     return (
-        <div className="c-todo-edit">
+        <div className="c-todo-edit" data-testid={`todo-edit-modal-${props.todoItem?.jobTitle}`}>
             <div className="c-todo-edit-container">
                 <h2 className="c-todo-edit__title">{t('todo-edit-form-title', 'Görevi Düzenle')}</h2>
                 <Formik
@@ -32,7 +32,7 @@ const TodoEditForm: FunctionComponent<{ todoItem: TodoModel | undefined, onCompl
                         <Row gutter={[10, 10]}>
                             <Col xxl={24}>
                                 <Form.Item name="jobTitle" label={fieldTitles.jobTitle}>
-                                    <Input name="jobTitle" size="large" placeholder={fieldTitles.jobTitle} disabled/>
+                                    <Input name="jobTitle" size="large" placeholder={fieldTitles.jobTitle} disabled data-testid="todo-edit-form-job-title"/>
                                 </Form.Item>
                             </Col>
                             <Col xxl={24}>
@@ -43,7 +43,7 @@ const TodoEditForm: FunctionComponent<{ todoItem: TodoModel | undefined, onCompl
                             <Col xxl={24}>
                                 <Space size="middle" align="center">
                                     <Button type="primary" danger size="large" onClick={props.onCancel}>{t('confirm-cancel-button-text', 'Onayla')}</Button>
-                                    <SubmitButton type="primary" size="large">{t('modal-save-button-text', 'Kaydet')}</SubmitButton>
+                                    <SubmitButton type="primary" size="large" data-testid="todo-edit-form-submit">{t('modal-save-button-text', 'Kaydet')}</SubmitButton>
                                 </Space>
                             </Col>
                         </Row>

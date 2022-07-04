@@ -53,6 +53,7 @@ const localizationsTr = [
     {key: 'todo-delete-item-confirm-content', value: 'Seçmiş olduğunuz görev kalıcı olarak silinecektir.', dataType: DataType.string},
     {key: 'todo-delete-item-success', value: '\'{{todo_name}}\' isimli görev başarı ile kaldırılmıştır.', dataType: DataType.string},
     {key: 'todo-update-item-success', value: '\'{{todo_name}}\' isimli görev önceliği başarı ile değiştirilmiştir.', dataType: DataType.string},
+    {key: 'todo-add-date', value: 'Ekleme Tarihi', dataType: DataType.string}
 
 ] as LanguageLocalizationModel[];
 
@@ -108,6 +109,7 @@ const localizationsEn = [
     {key: 'todo-delete-item-confirm-content', value: 'The job you selected will be permanently deleted.', dataType: DataType.string},
     {key: 'todo-delete-item-success', value: '\'Job named {{todo_name}}\' has been removed successfully.', dataType: DataType.string},
     {key: 'todo-update-item-success', value: 'The job priority named \'{{todo_name}}\' has been successfully changed.', dataType: DataType.string},
+    {key: 'todo-add-date', value: 'Add Date', dataType: DataType.string}
 
 ] as LanguageLocalizationModel[];
 
